@@ -33,7 +33,8 @@ app = Flask(
 
 # Instantiate app, set attributes
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://flask_deploy_user:DYoa4dGezKgUF8rtuW9LaromVZ4kn6Lg@dpg-cov66d821fec73ff82u0-a.oregon-postgres.render.com/flask_deploy"
+# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://flask_deploy_user:DYoa4dGezKgUF8rtuW9LaromVZ4kn6Lg@dpg-cov66d821fec73ff82u0-a.oregon-postgres.render.com/flask_deploy"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://my_database_b2ca_user:LLdQCuf2uRgn14dsJylWE6SqFvzug01B@dpg-cosh1i21hbls73fkvma0-a.ohio-postgres.render.com/my_database_b2ca"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = secrets.token_hex(16)
