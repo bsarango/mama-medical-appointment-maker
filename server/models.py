@@ -1,69 +1,73 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.hybrid import hybrid_property
 
 from config import db
 
 # Models go here!
-# class Patient(db.Model, SerializerMixin):
-# 	__tablename__ = 'patients'
+class Patient(db.Model, SerializerMixin):
+    __tablename__ = 'patients'
 
-# 	username = db.Column(db.String, unique=True, nullable = False)
-# 	_password_hash = db.Column(db.String, nullable = False)
-# 	name = db.Column(db.String, nullable=False)
-# 	dob = db.Column(db.Date, nullable = False)
-# 	address = db.Column(db.String)
-#     phone_number = db.Column(db.String)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, unique=True, nullable = False)
+    _password_hash = db.Column(db.String, nullable = False)
+    name = db.Column(db.String, nullable=False)
+    dob = db.Column(db.Date, nullable = False)
+    address = db.Column(db.String)
+    phone_number = db.Column(db.String)
 
-# 	appointments = db.relationship('Appointment', back_populates = patient , cascades = 'all, delete-orphan')
+    appointments = db.relationship('Appointment', back_populates='patient', cascade='all, delete-orphan')
 
-# 	serialize_rules = ('-appointments.patient',)
+    serialize_rules = ('-appointments.patient',)
 
-# 	def __repr__(self):
-# 		return f'Patient Name: {self.name}'
+    def __repr__(self):
+	    return f'Patient Name: {self.name}'
 	
-# 	@hybrid_property
-# 	def password_hash(self):
-# 		raise AttributeError("Cannot access password")
+    @hybrid_property
+    def password_hash(self):
+	    raise AttributeError("Cannot access password")
 		
-# 	@password_hash.setter
-# 	def password_hash(self, password):
-# 		password_hash = bycrpt.generate_password_hash(password.encode('utf-8'))
+    @password_hash.setter
+    def password_hash(self, password):
+	    password_hash = bycrpt.generate_password_hash(password.encode('utf-8'))
 
-# 		self._password_hash = password_hash.decode('utf-8')
+	    self._password_hash = password_hash.decode('utf-8')
 
-# class Appointment(db.Model, SerializerMixin):
-# 	__tablename__ = 'appointments'
+class Physician(db.Model, SerializerMixin):
+    __tablename__= 'physicians'
 
-# 	title = db.Column(db.String,nullable = False)
-# 	date_and_time = db.Column(db.DateTime, nullable = False)
-# 	specialty = db.Column(db.String)
-# 	completed = db.Column(db.Boolean)
-#     details = db.Column(db.String, nullable= False)
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String, nullable = False)
+    last_name = db.Column(db.String, nullable = False)
+    specialty = db.Column(db.String)
+    office_address = db.Column(db.String, nullable = False)
+    office_number = db.Column(db.Integer, nullable = False)
+    image = db.Column(db.String)
+
+    appointments = db.relationship('Appointment', back_populates = 'physician', cascade = 'all, delete-orphan')
+
+    serialize_rules = ('-appointments.physician',)
+
+    def __repr__(self):
+        return f'Physician Name: {self.name} Specialty: {self.specialty}'
+
+class Appointment(db.Model, SerializerMixin):
+    __tablename__ = 'appointments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String,nullable = False)
+    date_and_time = db.Column(db.DateTime, nullable = False)
+    specialty = db.Column(db.String)
+    completed = db.Column(db.Boolean)
+    details = db.Column(db.String, nullable= False)
 	
-# 	patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'))
-# 	physicians_id=db.Column(db.Integer, db.ForeignKey('phyisicians.id'))
+    patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'))
+    physicians_id=db.Column(db.Integer, db.ForeignKey('physicians.id'))
 
-# 	patient = db.relationship('Patient', back_populates = appointments)
-# 	physician = db.relationship('Physician', back_populates = appointments)
+    patient= db.relationship('Patient', back_populates = 'appointments')
+    physician = db.relationship('Physician', back_populates = 'appointments')
 
-# 	serialize_rules=('-patient.appointments', '-physician.appointments')
+    serialize_rules=('-patient.appointments', '-physician.appointments')
 
-# 	def __repr__(self):
-# 		return f'Appointment: {self.title}  Date: {self.date_and_time}'
-
-# class Physician(db.Model, SerializerMixin):
-# 	__tablename__= 'physicians'
-
-# 	first_name = db.Column(db.String, nullable = False)
-# 	last_name = db.Column(db.String, nullable = False)
-# 	specialty = db.Column(db.String)
-# 	office_address = db.Column(db.String, nullable = False)
-# 	office_number = db.Column(db.Integer, nullable = False)
-# 	image = db.Column(db.String)
-
-# 	appointments = db.relationship('Appointment', back_populates = physician, cascades = 'all, delete-orphan')
-
-# 	serialize_rules = ('-appointments.physician',)
-
-# 	def __repr__(self):
-# 		return f'Physician Name: {self.name} Specialty: {self.specialty}'
+    def __repr__(self):
+        return f'Appointment: {self.title}  Date: {self.date_and_time}'
