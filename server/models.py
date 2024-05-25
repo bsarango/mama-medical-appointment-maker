@@ -58,7 +58,7 @@ class Physician(db.Model, SerializerMixin):
     last_name = db.Column(db.String, nullable = False)
     specialty = db.Column(db.String)
     office_address = db.Column(db.String, nullable = False)
-    office_number = db.Column(db.Integer, db.CheckConstraint('length(office_number)==10'), unique = True, nullable = False)
+    office_number = db.Column(db.Integer, unique = True, nullable = False)
     image = db.Column(db.String)
 
     @validates('first_name')
@@ -87,6 +87,13 @@ class Physician(db.Model, SerializerMixin):
             return "Invalid specialty for practice. Enter again"
 
         return specialty
+
+    @validates('office_numner')
+    def validate_office_numner(self, key, office_number):
+        if len(str(office_number)) != 10:
+            return "Invalid number, its not 10 digits"
+
+        return office_number
 
     appointments = db.relationship('Appointment', back_populates = 'physician', cascade = 'all, delete-orphan')
 
