@@ -19,7 +19,6 @@ class Patient(db.Model, SerializerMixin):
 
     __table_args__=(
         db.CheckConstraint('length(username)>=7'),
-        db.CheckConstraint('length(_password_hash)>7')
         )
 
     @validates('name')
@@ -66,7 +65,7 @@ class Physician(db.Model, SerializerMixin):
     def validate_name(self, key, first_name):
         invalid_characters = ['!@#$%^&*()_+-=[]\}{><?/|1234567890']
         for c in invalid_characters:
-            if c in first_namename:
+            if c in first_name:
                 return "Invalid name. No numbers or special characters!"
             
         return first_name
