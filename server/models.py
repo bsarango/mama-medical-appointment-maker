@@ -102,8 +102,16 @@ class Appointment(db.Model, SerializerMixin):
     title = db.Column(db.String,nullable = False)
     date_and_time = db.Column(db.DateTime, nullable = False)
     specialty = db.Column(db.String)
-    completed = db.Column(db.Boolean)
     details = db.Column(db.String, nullable= False)
+
+    @validates('specialty')
+    def validate_specialty(self, key, specialty):
+        specialties = ['primary care', 'cardiology', 'nephrology', 'obstetrics and gynecology', 'pulmonary', 'neurology', 'endocrinology', 'dermatology', 'pediatrics']
+        
+        if specialty not in specialties and specialty != None:
+            return "Invalid specialty for practice. Enter again"
+
+        return specialty
 	
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'))
     physicians_id=db.Column(db.Integer, db.ForeignKey('physicians.id'))
