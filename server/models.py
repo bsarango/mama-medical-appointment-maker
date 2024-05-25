@@ -1,6 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import validates
 
 from config import db
 
@@ -12,7 +13,7 @@ class Patient(db.Model, SerializerMixin):
     username = db.Column(db.String, unique=True, nullable = False)
     _password_hash = db.Column(db.String, nullable = False)
     name = db.Column(db.String, nullable=False)
-    dob = db.Column(db.Date, nullable = False, db.CheckConstraint('dob < func.current_date()'))
+    dob = db.Column(db.Date, db.CheckConstraint('dob < func.current_date()'), nullable = False)
     address = db.Column(db.String)
     phone_number = db.Column(db.Integer, db.CheckConstraint('length(phone_number)==10'))
 
@@ -58,7 +59,7 @@ class Physician(db.Model, SerializerMixin):
     last_name = db.Column(db.String, nullable = False)
     specialty = db.Column(db.String)
     office_address = db.Column(db.String, nullable = False)
-    office_number = db.Column(db.Integer, unique = True, nullable = False, db.CheckConstraint('length(office_number)==10'))
+    office_number = db.Column(db.Integer, db.CheckConstraint('length(office_number)==10'), unique = True, nullable = False)
     image = db.Column(db.String)
 
     @validates('first_name')
