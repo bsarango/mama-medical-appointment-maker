@@ -12,9 +12,23 @@ class Patient(db.Model, SerializerMixin):
     username = db.Column(db.String, unique=True, nullable = False)
     _password_hash = db.Column(db.String, nullable = False)
     name = db.Column(db.String, nullable=False)
-    dob = db.Column(db.Date, nullable = False)
+    dob = db.Column(db.Date, nullable = False, db.CheckConstraint('dob < func.current_date()'))
     address = db.Column(db.String)
-    phone_number = db.Column(db.String)
+    phone_number = db.Column(db.Integer, db.CheckConstraint('length(phone_number)==10'))
+
+    __table_args__=(
+        db.CheckConstraint('length(username)>=7'),
+        db.CheckConstraint('length(_password_hash)>7')
+        )
+
+    @validates('name')
+    def validate_username(self, key, username):
+        invalid_characters = ['!@#$%^&*()_+-=[]\}{><?/|1234567890']
+        for c in invalid_characters:
+            if c in username:
+                return "Invalid username. No numbers or special characters!"
+            
+        return username
 
     appointments = db.relationship('Appointment', back_populates='patient', cascade='all, delete-orphan')
 
