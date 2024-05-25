@@ -22,13 +22,13 @@ class Patient(db.Model, SerializerMixin):
         )
 
     @validates('name')
-    def validate_username(self, key, username):
+    def validate_name(self, key, name):
         invalid_characters = ['!@#$%^&*()_+-=[]\}{><?/|1234567890']
         for c in invalid_characters:
-            if c in username:
-                return "Invalid username. No numbers or special characters!"
+            if c in name:
+                return "Invalid name. No numbers or special characters!"
             
-        return username
+        return name
 
     appointments = db.relationship('Appointment', back_populates='patient', cascade='all, delete-orphan')
 
@@ -58,8 +58,35 @@ class Physician(db.Model, SerializerMixin):
     last_name = db.Column(db.String, nullable = False)
     specialty = db.Column(db.String)
     office_address = db.Column(db.String, nullable = False)
-    office_number = db.Column(db.Integer, nullable = False)
+    office_number = db.Column(db.Integer, unique = True, nullable = False, db.CheckConstraint('length(office_number)==10'))
     image = db.Column(db.String)
+
+    @validates('first_name')
+    def validate_name(self, key, first_name):
+        invalid_characters = ['!@#$%^&*()_+-=[]\}{><?/|1234567890']
+        for c in invalid_characters:
+            if c in first_namename:
+                return "Invalid name. No numbers or special characters!"
+            
+        return first_name
+
+    @validates('last_name')
+    def validate_name(self, key, last_name):
+        invalid_characters = ['!@#$%^&*()_+-=[]\}{><?/|1234567890']
+        for c in invalid_characters:
+            if c in last_name:
+                return "Invalid name. No numbers or special characters!"
+            
+        return last_name
+
+    @validates('specialty')
+    def validate_specialty(self, key, specialty):
+        specialties = ['primary care', 'cardiology', 'nephrology', 'obstetrics and gynecology', 'pulmonary', 'neurology', 'endocrinology', 'dermatology', 'pediatrics']
+        
+        if specialty not in specialties and specialty != None:
+            return "Invalid specialty for practice. Enter again"
+
+        return specialty
 
     appointments = db.relationship('Appointment', back_populates = 'physician', cascade = 'all, delete-orphan')
 
