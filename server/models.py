@@ -88,8 +88,8 @@ class Physician(db.Model, SerializerMixin):
 
         return specialty
 
-    @validates('office_numner')
-    def validate_office_numner(self, key, office_number):
+    @validates('office_number')
+    def validate_office_number(self, key, office_number):
         if len(str(office_number)) != 10:
             return "Invalid number, its not 10 digits"
 
