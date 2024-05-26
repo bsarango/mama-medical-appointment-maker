@@ -2,6 +2,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import validates
+from datetime import date
 
 from config import db
 
@@ -13,22 +14,36 @@ class Patient(db.Model, SerializerMixin):
     username = db.Column(db.String, unique=True, nullable = False)
     _password_hash = db.Column(db.String, nullable = False)
     name = db.Column(db.String, nullable=False)
-    dob = db.Column(db.Date, db.CheckConstraint('dob < func.current_date()'), nullable = False)
+    dob = db.Column(db.Date, nullable = False)
     address = db.Column(db.String)
-    phone_number = db.Column(db.Integer, db.CheckConstraint('length(phone_number)==10'))
-
-    __table_args__=(
-        db.CheckConstraint('length(username)>=7'),
-        )
+    phone_number = db.Column(db.Integer)
 
     @validates('name')
     def validate_name(self, key, name):
         invalid_characters = ['!@#$%^&*()_+-=[]\}{><?/|1234567890']
         for c in invalid_characters:
             if c in name:
-                return "Invalid name. No numbers or special characters!"
+                raise ValueError("Invalid name. No numbers or special characters!")
             
         return name
+
+    @validates('phone_number')
+    def validate_phone_nunmber(self, key, phone_number):
+        
+        if phone_number != None or len(str(phone_number)) != 10:
+            raise ValueError("Invalid number, its not 10 digits")
+
+    @validates('dob')
+    def validate_dob(self, key, dob):
+        valid_date = datetime.today() - 18
+        
+        if dob >= valid_date:
+            raise ValueError("Invalid date, the user must be 18 years or older. Must put in another date of birth")
+
+    @validates('username')
+    def validate_username(self, key, username):
+        if len(username)<7:
+            raise ValueError("Username not long enough. Enter a username of 8 characters or longer")
 
     appointments = db.relationship('Appointment', back_populates='patient', cascade='all, delete-orphan')
 
@@ -66,7 +81,7 @@ class Physician(db.Model, SerializerMixin):
         invalid_characters = ['!@#$%^&*()_+-=[]\}{><?/|1234567890']
         for c in invalid_characters:
             if c in first_name:
-                return "Invalid name. No numbers or special characters!"
+                raise ValueError("Invalid name. No numbers or special characters!")
             
         return first_name
 
@@ -75,7 +90,7 @@ class Physician(db.Model, SerializerMixin):
         invalid_characters = ['!@#$%^&*()_+-=[]\}{><?/|1234567890']
         for c in invalid_characters:
             if c in last_name:
-                return "Invalid name. No numbers or special characters!"
+                raise ValueError("Invalid name. No numbers or special characters!")
             
         return last_name
 
@@ -84,14 +99,14 @@ class Physician(db.Model, SerializerMixin):
         specialties = ['primary care', 'cardiology', 'nephrology', 'obstetrics and gynecology', 'pulmonary', 'neurology', 'endocrinology', 'dermatology', 'pediatrics']
         
         if specialty not in specialties and specialty != None:
-            return "Invalid specialty for practice. Enter again"
+            raise ValueError("Invalid specialty for practice. Enter again")
 
         return specialty
 
     @validates('office_number')
     def validate_office_number(self, key, office_number):
         if len(str(office_number)) != 10:
-            return "Invalid number, its not 10 digits"
+            raise ValueError("Invalid number, its not 10 digits")
 
         return office_number
 
@@ -116,7 +131,7 @@ class Appointment(db.Model, SerializerMixin):
         specialties = ['primary care', 'cardiology', 'nephrology', 'obstetrics and gynecology', 'pulmonary', 'neurology', 'endocrinology', 'dermatology', 'pediatrics']
         
         if specialty not in specialties and specialty != None:
-            return "Invalid specialty for practice. Enter again"
+            raise ValueError("Invalid specialty for practice. Enter again")
 
         return specialty
 	
