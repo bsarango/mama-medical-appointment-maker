@@ -35,7 +35,7 @@ class Patient(db.Model, SerializerMixin):
 
     @validates('dob')
     def validate_dob(self, key, dob):
-        valid_date = datetime.today() - 18
+        valid_date = date.today() - 18
         
         if dob >= valid_date:
             raise ValueError("Invalid date, the user must be 18 years or older. Must put in another date of birth")

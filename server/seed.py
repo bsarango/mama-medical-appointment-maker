@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
         print ("Seeding Patients")
 
-        username = fake.username()
+        username = fake.user_name()
         name = fake.name()
         dob = fake.date_of_birth()
         address = "100 First Avenue New York, New York, 10000"
