@@ -9,6 +9,7 @@ from faker import Faker
 # Local imports
 from app import app
 from models import db
+from models import Patient, Physician, Appointment
 
 if __name__ == '__main__':
     fake = Faker()
@@ -19,24 +20,22 @@ if __name__ == '__main__':
         print("Clearing db...")
 
         Physician.query.delete()
-	    Appointment.query.delete()
-	    Patient.query.delete()
+        Appointment.query.delete()
+        Patient.query.delete()
 
-	    fake = Faker()
+        fake = Faker()
 
         print("Starting seed...")
 
         print ("Seeding Patients")
 
-		username = fake.user_name()
-	
-		username = fake.username()
-		name = fake.name()
-		dob = fake.date_of_birth()
+        username = fake.username()
+        name = fake.name()
+        dob = fake.date_of_birth()
         address = "100 First Avenue New York, New York, 10000"
         phone_number = 7181001000
 
-		patient = Patient(username = username, name=name, dob = dob, address = address, phone_number = phone_number)
+        patient = Patient(username = username, name=name, dob = dob, address = address, phone_number = phone_number)
 
         db.session.add(patient)
         db.session.commit()
