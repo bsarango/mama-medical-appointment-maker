@@ -33,9 +33,11 @@ if __name__ == '__main__':
         name = fake.name()
         dob = fake.date_of_birth()
         address = "100 First Avenue New York, New York, 10000"
-        phone_number = 7181001000
+        phone_number = "7181001000"
 
         patient = Patient(username = username, name=name, dob = dob, address = address, phone_number = phone_number)
+
+        patient.password_hash = "Password234"
 
         db.session.add(patient)
         db.session.commit()
@@ -46,7 +48,7 @@ if __name__ == '__main__':
         last_name = fake.name()
         specialty = "cardiology"
         office_address = "200 East 2nd Stree New York, New York, 10010"
-        office_number = 2122002000
+        office_number = "2122002000"
         image = "https://static.vecteezy.com/system/resources/previews/005/520/145/original/cartoon-drawing-of-a-doctor-vector.jpg"
 
         physician = Physician(first_name = first_name, last_name = last_name, specialty = specialty, office_address=office_address, office_number = office_number,image=image)

@@ -3,6 +3,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import validates
 from datetime import date
+from config import bcrypt
 
 from config import db
 
@@ -16,7 +17,7 @@ class Patient(db.Model, SerializerMixin):
     name = db.Column(db.String, nullable=False)
     dob = db.Column(db.Date, nullable = False)
     address = db.Column(db.String)
-    phone_number = db.Column(db.Integer)
+    phone_number = db.Column(db.String)
 
     @validates('name')
     def validate_name(self, key, name):
@@ -30,20 +31,32 @@ class Patient(db.Model, SerializerMixin):
     @validates('phone_number')
     def validate_phone_nunmber(self, key, phone_number):
         
-        if phone_number != None or len(str(phone_number)) != 10:
-            raise ValueError("Invalid number, its not 10 digits")
+        if phone_number != None: 
+            if len(phone_number) != 10:
+                raise ValueError("Invalid number, its not 10 digits")
+            digits_for_number = '0123456789'
+            for digit in phone_number:
+                if digit not in digits_for_number:
+                    raise ValueError("Invalid number. Only digits allowed")
+
+        return phone_number
 
     @validates('dob')
     def validate_dob(self, key, dob):
-        valid_date = date.today() - 18
-        
+        print(type(dob))
+        today = date.today()
+        valid_date = date(today.year-18, today.month, today.day)
         if dob >= valid_date:
             raise ValueError("Invalid date, the user must be 18 years or older. Must put in another date of birth")
+
+        return dob
 
     @validates('username')
     def validate_username(self, key, username):
         if len(username)<7:
             raise ValueError("Username not long enough. Enter a username of 8 characters or longer")
+
+        return username
 
     appointments = db.relationship('Appointment', back_populates='patient', cascade='all, delete-orphan')
 
@@ -73,7 +86,7 @@ class Physician(db.Model, SerializerMixin):
     last_name = db.Column(db.String, nullable = False)
     specialty = db.Column(db.String)
     office_address = db.Column(db.String, nullable = False)
-    office_number = db.Column(db.Integer, unique = True, nullable = False)
+    office_number = db.Column(db.String, unique = True, nullable = False)
     image = db.Column(db.String)
 
     @validates('first_name')
@@ -105,8 +118,13 @@ class Physician(db.Model, SerializerMixin):
 
     @validates('office_number')
     def validate_office_number(self, key, office_number):
-        if len(str(office_number)) != 10:
+        if len(office_number) != 10:
             raise ValueError("Invalid number, its not 10 digits")
+
+        digits_for_number = '0123456789'
+        for d in office_number:
+            if d not in digits_for_number:
+                raise ValueError("Invalid number. Only digits allowed")
 
         return office_number
 
