@@ -13,8 +13,10 @@ from models import db
 if __name__ == '__main__':
     fake = Faker()
     with app.app_context():
-        print("Starting seed...")
+        
         # Seed code goes here!
+
+        print("Clearing db...")
 
         Physician.query.delete()
 	    Appointment.query.delete()
@@ -22,7 +24,9 @@ if __name__ == '__main__':
 
 	    fake = Faker()
 
-        # adding Patients
+        print("Starting seed...")
+
+        print ("Seeding Patients")
 
 		username = fake.user_name()
 	
@@ -37,7 +41,7 @@ if __name__ == '__main__':
         db.session.add(patient)
         db.session.commit()
 
-        # adding Physicians
+        print("Seeding Physicians")
 
         first_name = fake.name()
         last_name = fake.name()
@@ -51,7 +55,7 @@ if __name__ == '__main__':
         db.session.add(physician)
         db.session.commit()
 
-        #adding appointment
+        print("Seeding Appointments")
 
         title = "Cardiology Check Up"
         date_and_time = fake.date_time()
