@@ -27,9 +27,9 @@ app = Flask(
 
 # deployed version comment out below code, local version comment in below code
 # app = Flask(__name__)
-#static_url_path='',
-#static_folder='../client/build',
-#template_folder_folder='../client/build'
+# static_url_path='',
+# static_folder='../client/build',
+# template_folder_folder='../client/build'
 
 # Instantiate app, set attributes
 app = Flask(__name__)

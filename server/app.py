@@ -22,39 +22,40 @@ def index():
 def not_found(e):
     return render_template("index.html")
 
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def catch_all(path):
-#     return render_template("index.html")
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
 
-# class Patients_By_Id(Resource):
+class Patients_By_Id(Resource):
+    
+    def get(self, id):
+        if session.get('patient_id'):
 
-# 	def get(self, id):
-# 		if session.get(‘patient_id’):
+            patient = Patient.query.fitler_by(id=id).first()
 
-# 			patient = Patient.query.fitler_by(id=id).first()
-		
-# 			if patient:
-# 				return patient.to_dict(), 200
-# 		return “message”:”Patient not logged in. Please log in to continue” , 4…
+            if patient:
+                return patient.to_dict(), 200
 
-# 	def patch(self, id):
-# 		if session.get(‘patient_id’):
-		
-# 			json = request.get_json()
-# 			patient = Patient.query.filter_by(id=id).first()
-		
-# 			try:
-# 				for attr in json:
-# 					setattr(patient, attr, json[attr])
+        return {"message":"Patient not logged in. Please log in to continue"}, 401
+
+    def patch(self,id):
+        if session.get('patient_id'):
+            json = request.get_json()
+            patient = Patient.query.filter_by(id=id).first()
+            try:
+                for attr in json:
+                    setattr(patient, attr, json[attr])
 				
-# 				db.session.add(patient)
-# 				db.session.commit()
+                    db.session.add(patient)
+                    db.session.commit()
 
-# 				return patient.to_dict(),201*
+                return patient.to_dict(), 202
 
-# 			except ValueError:
-# 				return {‘error’: “Invalid entry for profile update’, 404}*
+            except ValueError:
+                return {'error':'Invalid entry for profile update'}, 400
+        
+        return {'message':'User not recognized. Please sign in'}, 401
 
 
 # class Appointments(Resource):
@@ -185,7 +186,7 @@ def not_found(e):
 # 		return {‘error’: ‘Unable to log out. Patient not logged in’}, 401
 		
 
-# api.add_resource(Patients_By_Id, “/patient_profile/<int:id>”>
+api.add_resource(Patients_By_Id, "/patient_profile/<int:id>")
 # api.add_resource(Appointments, “/appointments”)
 # api.add_resource(Appointments_By_Id, “/appointment_details/<int:id>”)
 # api.add_resource(Physicians, “/physicians_index”)
