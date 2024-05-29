@@ -9,7 +9,7 @@ from flask_restful import Resource
 # Local imports
 from config import app, db, api
 # Add your model imports
-
+from models import Patient, Physician, Appointment
 
 
 
@@ -118,20 +118,22 @@ class Patients_By_Id(Resource):
 # 		return {‘message’ : ‘’}, 200
 
 
-# class Physicians(Resource):
+class Physicians(Resource):
 
-# 	def get(self, id):
-# 		physicians = [physician.to_dict() for physician in Physician.query.all()]
-# 		return physicians, 200
+	def get(self):
+		physicians = [physician.to_dict() for physician in Physician.query.all()]
+		return physicians, 200
 
 
-# class Physicians_By_Id(Resource, Id):
+class Physicians_By_Id(Resource):
 
-# 	def get(self, id)
-# 		physician = Physician.query.filter_by(id=id).first()
+    def get(self, id):
+        physician = Physician.query.filter_by(id=id).first().to_dict()
+        
+        if physician:
+            return physician,200
 
-# 		return physician.to_dict(),200
-
+        return {'error':'Physician not found. Please select another physician'}, 404
 
 # class CheckSession(Resource):
 
@@ -189,8 +191,8 @@ class Patients_By_Id(Resource):
 api.add_resource(Patients_By_Id, "/patient_profile/<int:id>")
 # api.add_resource(Appointments, “/appointments”)
 # api.add_resource(Appointments_By_Id, “/appointment_details/<int:id>”)
-# api.add_resource(Physicians, “/physicians_index”)
-# api.add_resource(Physicians_By_Id, “/physician_details”)
+api.add_resource(Physicians, "/physicians_index")
+api.add_resource(Physicians_By_Id, "/physicians_index/<int:id>")
 # api.add_resource(CheckSession, “/check_session”)
 # api.add_resource(SignUp, “/signup”)
 # api.add_resource(LogIn, “/login”)
