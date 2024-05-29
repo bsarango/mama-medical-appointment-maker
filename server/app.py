@@ -146,19 +146,26 @@ class CheckSession(Resource):
         return {'error':'Patient not signed in. Please sign in.'} , 401
 
 
-# class SignUp(Resource):
+class SignUp(Resource):
+    
+    def post(self):
+        json = request.get_json()
+        new_patient = Patient(
+					username= json.get('username'), 
+                    name = json.get('name'), 
+                    dob= json.get('dob'), 
+                    address=json.get('address'), 
+                    phone_number=json.get('phone_number')
+                    )
+        new_patient.password_hash = json.get('password')
+    
+        try:   
+            db.session.add(new_patient)
+            db.session.commit()
+            return new_patient.to_dict(), 201
 
-# 	def post(self):
-# 		json = request.get_json()
-# 		new_patient = Patient(
-# 					username= json.get(‘username’), name = json.get(‘name), dob= json.get(‘dob’), address=json.get(‘address’), phone_number=json.get(‘phone_number’)
-# 		new_patient.password_hash = json.get(‘password’)
-# 		try:
-# 			db.session.add(new_patient)
-# 			db.session.commit()
-# 			return new_patient.to_dict(), 201
-# 		except ValueError:
-# 			return {‘error’:’Invalid new patient. Try again.}, 422
+        except ValueError:
+            return {'error':'Error in entering information. Try again'}, 422
 
 # class Login(Resource):
 
