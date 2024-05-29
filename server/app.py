@@ -135,16 +135,15 @@ class Physicians_By_Id(Resource):
 
         return {'error':'Physician not found. Please select another physician'}, 404
 
-# class CheckSession(Resource):
+class CheckSession(Resource):
+    
+        def get(self):
+            patient = Patient.query.filter(Patient.id == session.get('patient_id')).first()
 
-# 	def get(self):
-		
-# 		patient = Patient.query.filter(Patient.id == session.get(‘patient_id’).first()
-
-# 		if patient:
-# 			return patient.to_dict(), 200
-		
-# 		return {‘error’:’Patient not signed in. Please sign in.’} , 401
+        if patient:
+            return patient.to_dict(), 200
+            
+        return {'error':'Patient not signed in. Please sign in.'} , 401
 
 
 # class SignUp(Resource):
