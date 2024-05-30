@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, render_template
+from flask import request, render_template, session
 from flask_restful import Resource
 from datetime import date
 
