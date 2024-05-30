@@ -154,7 +154,7 @@ class Appointment(db.Model, SerializerMixin):
         return specialty
 	
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'))
-    physicians_id=db.Column(db.Integer, db.ForeignKey('physicians.id'))
+    physician_id=db.Column(db.Integer, db.ForeignKey('physicians.id'))
 
     patient= db.relationship('Patient', back_populates = 'appointments')
     physician = db.relationship('Physician', back_populates = 'appointments')

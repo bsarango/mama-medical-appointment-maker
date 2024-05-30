@@ -74,8 +74,9 @@ class Appointments(Resource):
         if session.get('patient_id'):
             json = request.get_json()
             split_datetime = json.get('date_and_time').split('-')
-            full_date_and_time = datetime(int(full_date_and_time[0]),int(full_date_and_time[1]),int(full_date_and_time[2]),int(full_date_and_time[3]),int(full_date_and_time[4]))
-            appointment = Appointment(title = json.get('title'), date_and_time = full_date_and_time, patient_id = user.session.get('user_id'))
+            full_date_and_time = datetime(int(split_datetime[0]),int(split_datetime[1]),int(split_datetime[2]),int(split_datetime[3]),int(split_datetime[4]))
+
+            appointment = Appointment(title = json.get('title'), date_and_time = full_date_and_time, patient_id = session.get('patient_id'), specialty =json.get('specialty'), details = json.get('details'), physician_id = json.get('physician_id'))
 
             try:
                 db.session.add(appointment)
@@ -84,6 +85,8 @@ class Appointments(Resource):
                 
             except ValueError:
                 return {'error': 'Invalid input made. Try again.'}, 400
+        
+        return {'message':'Patient not logged in. Please log in to make an appointment!'}, 401
 
 
 # class Appointment_By_Id(Resource, Id):
@@ -201,7 +204,7 @@ class Logout(Resource):
 		
 
 api.add_resource(Patients_By_Id, "/patient_profile/<int:id>")
-# api.add_resource(Appointments, “/appointments”)
+api.add_resource(Appointments, "/appointments")
 # api.add_resource(Appointments_By_Id, “/appointment_details/<int:id>”)
 api.add_resource(Physicians, "/physicians_index")
 api.add_resource(Physicians_By_Id, "/physicians_index/<int:id>")
