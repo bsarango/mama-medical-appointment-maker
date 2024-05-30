@@ -5,7 +5,7 @@
 # Remote library imports
 from flask import request, render_template, session
 from flask_restful import Resource
-from datetime import date
+from datetime import datetime, date
 
 # Local imports
 from config import app, db, api
@@ -33,7 +33,7 @@ class Patients_By_Id(Resource):
     def get(self, id):
         if session.get('patient_id'):
 
-            patient = Patient.query.fitler_by(id=id).first()
+            patient = Patient.query.filter_by(id=id).first()
 
             if patient:
                 return patient.to_dict(), 200
@@ -59,29 +59,31 @@ class Patients_By_Id(Resource):
         return {'message':'User not recognized. Please sign in'}, 401
 
 
-# class Appointments(Resource):
+class Appointments(Resource):
 
-# 	def get(self):
+    def get(self):
 
-# 		if session.get(‘patient_id’):
-# 			appointments = [appointment.to_dict() for appointment in Appointment.query.all()]
-# 			return appointments, 200
+        if session.get('patient_id'):
+            appointments = [appointment.to_dict() for appointment in Appointment.query.all()]
+            return appointments, 200
 
-# 		return {‘message’: ‘Patient not logged in, please login to continue’}, 401
+        return {'message': 'Patient not logged in, please login to continue'}, 401
 
-# 	def post(self):
+    def post(self):
 
-# 		if session.get(‘patient_id’):
-# 			json = request.get_json()
-# 			appointment = Appointment(title = json.get(‘title’), date_and_time = json.get(“date_and_time”), patient_id = user.session.get(‘user_id’)
+        if session.get('patient_id'):
+            json = request.get_json()
+            split_datetime = json.get('date_and_time').split('-')
+            full_date_and_time = datetime(int(full_date_and_time[0]),int(full_date_and_time[1]),int(full_date_and_time[2]),int(full_date_and_time[3]),int(full_date_and_time[4]))
+            appointment = Appointment(title = json.get('title'), date_and_time = full_date_and_time, patient_id = user.session.get('user_id'))
 
-# 			try:
-# 				db.session.add(appointment)
-# 				db.session.commit()
-# 				return appointment.to_dict(), 201
-
-# 			except ValueError:
-# 				return {‘error’: ‘Invalid input made. Try again.’} ,400
+            try:
+                db.session.add(appointment)
+                db.session.commit()
+                return appointment.to_dict(), 201
+                
+            except ValueError:
+                return {'error': 'Invalid input made. Try again.'}, 400
 
 
 # class Appointment_By_Id(Resource, Id):
