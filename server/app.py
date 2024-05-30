@@ -167,31 +167,32 @@ class SignUp(Resource):
         except ValueError:
             return {'error':'Error in entering information. Try again'}, 422
 
-# class Login(Resource):
+class Login(Resource):
 
-# 	def post(self):
-# 		json = request.get_json()
-# 		username = json.get(‘username’)
-# 		patient = Patient.query.filter(Patient.username == username).first()
-# 		password = json.get(‘password’)
+    def post(self):
+        json = request.get_json()   
+        username = json.get('username')
+        patient = Patient.query.filter(Patient.username == username).first()
+        password = json.get('password')
 		
-# 		if patient:
-# 			if user.authenticate(password):
-# 				session[‘patient_id’] = patient.id
-# 				return patient.to_dict(), 201
+        if patient:
+            if user.authenticate(password):
+                session['patient_id'] = patient.id
+                return patient.to_dict(), 201
 
-# 		return {‘message’: ‘Invalid credentials, Try logging in again’}
+        return {'message': 'Invalid credentials, Try logging in again'}, 401
 
 
-# class Logout(Resource):
+class Logout(Resource):
+    
+    def delete(self):
+        patient = Patient.query.filter(Patient.id = session.get('patient_id')).first()
 
-# 	def delete(self):
-# 		patient = Patient.query.filter(Patient.id = session.get(‘patient_id’)).first()
-
-# 		if patient:
-# 			session[‘patient_id’] = None
-# 			return {‘message’: ‘’}, 204
-# 		return {‘error’: ‘Unable to log out. Patient not logged in’}, 401
+        if patient:
+            session['patient_id'] = None
+            return {'message':''}, 204
+            
+        return {'error': 'Unable to log out. Patient not logged in'}, 401
 		
 
 api.add_resource(Patients_By_Id, "/patient_profile/<int:id>")
@@ -199,10 +200,10 @@ api.add_resource(Patients_By_Id, "/patient_profile/<int:id>")
 # api.add_resource(Appointments_By_Id, “/appointment_details/<int:id>”)
 api.add_resource(Physicians, "/physicians_index")
 api.add_resource(Physicians_By_Id, "/physicians_index/<int:id>")
-# api.add_resource(CheckSession, “/check_session”)
-# api.add_resource(SignUp, “/signup”)
-# api.add_resource(LogIn, “/login”)
-# api.add_resource(LogOut, “/logout”)
+api.add_resource(CheckSession, "/check_session")
+api.add_resource(SignUp, "/signup")
+api.add_resource(LogIn, "/login")
+api.add_resource(LogOut, "/logout")
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
