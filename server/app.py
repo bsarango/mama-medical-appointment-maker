@@ -5,6 +5,7 @@
 # Remote library imports
 from flask import request, render_template
 from flask_restful import Resource
+from datetime import date
 
 # Local imports
 from config import app, db, api
@@ -140,20 +141,22 @@ class CheckSession(Resource):
         def get(self):
             patient = Patient.query.filter(Patient.id == session.get('patient_id')).first()
 
-        if patient:
-            return patient.to_dict(), 200
+            if patient:
+                return patient.to_dict(), 200
             
-        return {'error':'Patient not signed in. Please sign in.'} , 401
+            return {'error':'Patient not signed in. Please sign in.'} , 401
 
 
 class SignUp(Resource):
     
     def post(self):
         json = request.get_json()
+        split_dob = json.get('dob').split('-')
+        full_dob = date(int(split_dob[0]),int(split_dob[1]), int(split_dob[2]))
         new_patient = Patient(
 					username= json.get('username'), 
                     name = json.get('name'), 
-                    dob= json.get('dob'), 
+                    dob= full_dob, 
                     address=json.get('address'), 
                     phone_number=json.get('phone_number')
                     )
@@ -176,7 +179,7 @@ class Login(Resource):
         password = json.get('password')
 		
         if patient:
-            if user.authenticate(password):
+            if patient.authenticate(password):
                 session['patient_id'] = patient.id
                 return patient.to_dict(), 201
 
@@ -186,7 +189,7 @@ class Login(Resource):
 class Logout(Resource):
     
     def delete(self):
-        patient = Patient.query.filter(Patient.id = session.get('patient_id')).first()
+        patient = Patient.query.filter(Patient.id == session.get('patient_id')).first()
 
         if patient:
             session['patient_id'] = None
@@ -202,8 +205,8 @@ api.add_resource(Physicians, "/physicians_index")
 api.add_resource(Physicians_By_Id, "/physicians_index/<int:id>")
 api.add_resource(CheckSession, "/check_session")
 api.add_resource(SignUp, "/signup")
-api.add_resource(LogIn, "/login")
-api.add_resource(LogOut, "/logout")
+api.add_resource(Login, "/login")
+api.add_resource(Logout, "/logout")
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
