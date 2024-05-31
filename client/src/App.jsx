@@ -16,6 +16,18 @@ function App() {
     });
   },[]);
 
+  const textToDisplay = (patient)=>{
+    if(patient){
+      loggedInText = (
+      <h3>
+        Welcome {patient.name}. Please feel free to check any physicians, make an appointment, or manage any existing ones.
+      </h3>
+      )
+      return loggedInText
+    }
+    return <h3>Welcome to the online app. Please log in to make an appointment or manage appointments. You can create an account if you are new to our services.</h3>
+  };
+
   return (
     <>
       <NavBar/>
@@ -24,6 +36,10 @@ function App() {
         <h3>Appointment making system focused on helping you obtain the best care for you needs.
           We care just like Mama did for you!
         </h3>
+      </div>
+      <div>
+        {textToDisplay}
+
       </div>
 
       {/* <div>
@@ -47,7 +63,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p> */}
     </>
-  )
+  );
 }
 
 export default App
