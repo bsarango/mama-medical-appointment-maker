@@ -89,39 +89,40 @@ class Appointments(Resource):
         return {'message':'Patient not logged in. Please log in to make an appointment!'}, 401
 
 
-# class Appointment_By_Id(Resource, Id):
+class Appointments_By_Id(Resource):
 
-# 	def get(self, id):
-# 		appointment = Appointment.query.filter_by(id=id).first()
+    def get(self, id):
+        appointment = Appointment.query.filter_by(id=id).first()
 		
-# 		if appointment:
-# 			return appointment.to_dict(), 200
+        if appointment:
+            return appointment.to_dict(), 200
 
-# 		return {‘message’ : ‘This appointment can’t be found. Try again.’}, 404
-
-# 	def patch(self, id):
-# 		json = request.get_json()
-# 		appointment  = Appointment.query.filter_by(id=id).first()
+        return {'message' : "This appointment can't be found. Try again."}, 404
+        
+    def patch(self, id):
+        json = request.get_json()
+        appointment = Appointment.query.filter_by(id=id).first()
 		
-# 		for attr in json:
-# 			setattr(appointment, attr, json.get(attr))
+        for attr in json:
+            setattr(appointment, attr, json.get(attr))
 
-# 		try:
-# 			db.session.add(appointment)
-# 			db.session.commit()
+        try:
+            db.session.add(appointment)
+            db.session.commit()
 
-# 			return appointment.to_dict(), 204
+            return appointment.to_dict(), 204
 
-# 		except ValueError:
-# 			return {“error”:”Invalid input given. Try again.”}, 400	
+        except ValueError:
+            return {'error':'Invalid input given. Try again.'}, 400	
 
-# 	def delete(self, id):
-# 		appointment = Appointment.query.filter_by(id=id).first()
-		
-# 		db.session.delete(appointment)
-# 		db.session.commit()
+    def delete(self, id):
+        appointment = Appointment.query.filter_by(id=id).first()
+        if appointment:
+            db.session.delete(appointment)
+            db.session.commit()
+            return {'message' :''}, 200
 
-# 		return {‘message’ : ‘’}, 200
+        return {"error":"Appointment not found. Try again"}, 404
 
 
 class Physicians(Resource):
@@ -205,7 +206,7 @@ class Logout(Resource):
 
 api.add_resource(Patients_By_Id, "/patient_profile/<int:id>")
 api.add_resource(Appointments, "/appointments")
-# api.add_resource(Appointments_By_Id, “/appointment_details/<int:id>”)
+api.add_resource(Appointments_By_Id, "/appointments/<int:id>")
 api.add_resource(Physicians, "/physicians_index")
 api.add_resource(Physicians_By_Id, "/physicians_index/<int:id>")
 api.add_resource(CheckSession, "/check_session")
