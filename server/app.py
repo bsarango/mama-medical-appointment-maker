@@ -92,37 +92,48 @@ class Appointments(Resource):
 class Appointments_By_Id(Resource):
 
     def get(self, id):
-        appointment = Appointment.query.filter_by(id=id).first()
-		
-        if appointment:
-            return appointment.to_dict(), 200
 
-        return {'message' : "This appointment can't be found. Try again."}, 404
+        if session.get('patient_id'):
+            appointment = Appointment.query.filter_by(id=id).first()
+		
+            if appointment:
+                return appointment.to_dict(), 200
+
+            return {'message' : "This appointment can't be found. Try again."}, 404
+
+        return {'message':'Patient not logged in. Please login to view an appointment'}, 401
         
     def patch(self, id):
-        json = request.get_json()
-        appointment = Appointment.query.filter_by(id=id).first()
+        if session.get('patient_id'):
+            json = request.get_json()
+            appointment = Appointment.query.filter_by(id=id).first()
 		
-        for attr in json:
-            setattr(appointment, attr, json.get(attr))
+            for attr in json:
+                setattr(appointment, attr, json.get(attr))
 
-        try:
-            db.session.add(appointment)
-            db.session.commit()
+            try:
+                db.session.add(appointment)
+                db.session.commit()
 
-            return appointment.to_dict(), 204
+                return appointment.to_dict(), 204
 
-        except ValueError:
-            return {'error':'Invalid input given. Try again.'}, 400	
+            except ValueError:
+                return {'error':'Invalid input given. Try again.'}, 400	
+        
+        return {'message':'Patient not logged in. Please login to update the appointment'}, 401
 
     def delete(self, id):
-        appointment = Appointment.query.filter_by(id=id).first()
-        if appointment:
-            db.session.delete(appointment)
-            db.session.commit()
-            return {'message' :''}, 200
+        if session.get('patient_id'):
+            appointment = Appointment.query.filter_by(id=id).first()
+            
+            if appointment:
+                db.session.delete(appointment)
+                db.session.commit()
+                return {'message' :''}, 200
 
-        return {"error":"Appointment not found. Try again"}, 404
+            return {"error":"Appointment not found. Try again"}, 404
+        
+        return {'message':'Patient not logged in. Please login to cancel the appointment'}, 401
 
 
 class Physicians(Resource):
