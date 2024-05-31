@@ -44,8 +44,8 @@ if __name__ == '__main__':
 
         print("Seeding Physicians")
 
-        first_name = fake.name()
-        last_name = fake.name()
+        first_name = fake.first_name()
+        last_name = fake.last_name()
         specialty = "cardiology"
         office_address = "200 East 2nd Stree New York, New York, 10010"
         office_number = "2122002000"
