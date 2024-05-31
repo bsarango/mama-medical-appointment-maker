@@ -19,9 +19,12 @@ function App() {
   const textToDisplay = (patient)=>{
     if(patient){
       loggedInText = (
-      <h3>
-        Welcome {patient.name}. Please feel free to check any physicians, make an appointment, or manage any existing ones.
-      </h3>
+      <>
+        <h3>
+          Welcome {patient.name}. Please feel free to check any physicians, make an appointment, or manage any existing ones.
+        </h3>
+        <Appointments patient = {patient}/>
+      </>
       )
       return loggedInText
     }
@@ -39,7 +42,6 @@ function App() {
       </div>
       <div>
         {textToDisplay}
-
       </div>
 
       {/* <div>
