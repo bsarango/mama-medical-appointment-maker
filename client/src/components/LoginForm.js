@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 
-function LoginForm(){
+function LoginForm({patient, setLoggedIn}){
 
     const initialValues = {
         username : "",
@@ -13,6 +13,7 @@ function LoginForm(){
     function handleSubmit(){
         e.preventDefault();
         console.log(patientCredentials);
+        setLoggedIn(true)
     };
 
     function handleChange(e){
