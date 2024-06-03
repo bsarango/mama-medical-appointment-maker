@@ -21,6 +21,11 @@ function SignupForm(){
         });
     };
 
+    function handleSubmit(e){
+        e.preventDefault()
+        console.log(newPatientInfo)
+    }
+
     return(
         <div>
         </div>
