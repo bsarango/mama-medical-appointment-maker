@@ -1,5 +1,5 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
+import React from 'react'
+import {NavLink} from 'react-router-dom'
 
 function NavBar(){
     return(
@@ -8,31 +8,31 @@ function NavBar(){
                 to="/"
                 className = "nav-link"
             >
-                Home
+            Home
             </NavLink>
             <NavLink 
                 to="/physicians_index"
                 className = "nav-link"
             >
-                Physicians
+            Physicians
             </NavLink>
             <NavLink 
                 to="/patient_profile/<int:id>"
                 className = "nav-link"
             >
-                My Profile
+            My Profile
             </NavLink>
             <NavLink 
                 to="/signup"
                 className = "nav-link"
             >
-                Signup
+            Signup
             </NavLink>
             <NavLink 
                 to="/login"
                 className = "nav-link"
             >
-                Login
+            Login
             </NavLink>
         </nav>
     )
