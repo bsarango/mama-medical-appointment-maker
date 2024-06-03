@@ -30,11 +30,16 @@ function LoginForm(){
                 <input
                     type = "text"
                     name = "username"
-                    value = 
+                    value = {patientCredentials.username}
                     onChange = {handleChange}
-                >
-
-                </input>
+                />
+                <label>Password</label>
+                <input
+                    type = "text"
+                    name = "password"
+                    value = {patientCredentials.password}
+                    onChange = {handleChange}
+                />
             </form>
         </div>
     )
