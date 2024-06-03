@@ -8,19 +8,23 @@ import Appointments from './components/Appointments'
 
 function App() {
   const [patient, setPatient] = useState(null)
-  
+  const [loggedIn, setLoggedIn] = useState(false)
+
   useEffect(()=>{
     fetch("/check_session")
     .then(r =>{
       if (r.ok){
-        r.json().then(patient=>setPatient(patient));
-      }
+        r.json().then(patient=>{
+          setPatient(patient)
+          setLoggedIn(true)
+      });
+      };
     });
   },[]);
 
   const textToDisplay = (patient)=>{
     if(patient){
-      loggedInText = (
+      const loggedInText = (
       <>
         <h3>
           Welcome {patient.name}. Please feel free to check any physicians, make an appointment, or manage any existing ones.
