@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react';
 
 function AppointmentForm(){
 
@@ -10,6 +10,19 @@ function AppointmentForm(){
     };
 
     const [appointment, setAppointment] = useState(initialValues)
+
+    function handleChange(e){
+        valueName = e.target.name;
+        value = e.target.value.name;
+        setAppointment(
+            {...appointment,[valueName]: value}
+        );
+    };
+
+    function handleSubmit(e){
+        e.preventDefault();
+        console.log(appointment)
+    }
 
     return(
         <div>
