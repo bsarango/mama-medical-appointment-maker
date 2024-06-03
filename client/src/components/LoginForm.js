@@ -4,14 +4,15 @@ import {useState} from 'react'
 function LoginForm(){
 
     const initialValues = {
-        username = "",
-        password = "",
+        username : "",
+        password : "",
     };
 
     const [patientCredentials, setPatientCredentials] = useState(initialValues)
 
     function handleSubmit(){
-
+        e.preventDefault();
+        console.log(patientCredentials);
     };
 
     function handleChange(e){
@@ -19,7 +20,7 @@ function LoginForm(){
         value = e.target.value
         setPatientCredentials(
             {...patientCredentials,[valueName]: value}
-        )
+        );
     };
 
     return(
@@ -44,3 +45,5 @@ function LoginForm(){
         </div>
     )
 }
+
+export default LoginForm
