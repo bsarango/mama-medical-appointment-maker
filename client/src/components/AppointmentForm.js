@@ -1,6 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function AppointmentForm(){
+
+    const [physicians, setPhysicians] = 
+
+    useEffect(()=>{
+        fetch("/physicians_index")
+        .then(r=>{
+            if(r.ok){
+                r.json().then(physicianList=>setPhysicians(physicianList))
+            }
+        });
+    }, []);
 
     const initialValues = {
         title : "",
@@ -10,6 +21,18 @@ function AppointmentForm(){
     };
 
     const [appointment, setAppointment] = useState(initialValues)
+
+    // const physicianOptions = physicians.map(physician=>{
+    //     return (
+    //         <div>
+    //             <img>{physician.image}</img>
+    //             <h4>Dr. {physician.first_name} {physician.last_name}</h4>
+    //             <button>
+    //                 Set Appointment
+    //             </button>
+    //         </div>
+    //     )
+    // });
 
     function handleChange(e){
         valueName = e.target.name;
