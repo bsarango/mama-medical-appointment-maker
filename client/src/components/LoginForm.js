@@ -3,12 +3,23 @@ import {useState} from 'react'
 
 function LoginForm(){
 
+    const initialValues = {
+        username = "",
+        password = "",
+    };
+
+    const [patientCredentials, setPatientCredentials] = useState(initialValues)
+
     function handleSubmit(){
 
     };
 
-    function handleChange(){
-
+    function handleChange(e){
+        valueName = e.target.name
+        value = e.target.value
+        setPatientCredentials(
+            {...patientCredentials,[valueName]: value}
+        )
     };
 
     return(
