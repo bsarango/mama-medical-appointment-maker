@@ -22,8 +22,8 @@ function App() {
     });
   },[]);
 
-  const textToDisplay = (patient)=>{
-    if(patient){
+  const textToDisplay = ()=>{
+    if(loggedIn){
       const loggedInText = (
       <>
         <h3>
@@ -33,7 +33,7 @@ function App() {
       </>
       )
       return loggedInText
-    }
+    };
     return <h3>Welcome to the online app. Please log in to make an appointment or manage appointments. You can create an account if you are new to our services.</h3>
   };
 
@@ -41,7 +41,7 @@ function App() {
     <>
       <NavBar/>
       <div>
-        <b>MaMa by My Medical Group</b>
+        <h1>MaMa by My Medical Group</h1>
         <h3>Appointment making system focused on helping you obtain the best care for you needs.
           We care just like Mama did for you!
         </h3>
