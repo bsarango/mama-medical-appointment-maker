@@ -4,28 +4,33 @@ import {NavLink} from 'react-router-dom';
 function NavBar(){
     return(
         <nav>
-            <NavLink to="/"
-                exact
+            <NavLink 
+                to="/"
+                className = "nav-link"
             >
                 Home
             </NavLink>
-            <NavLink to="/physicians_index"
-                exact
+            <NavLink 
+                to="/physicians_index"
+                className = "nav-link"
             >
                 Physicians
             </NavLink>
-            <NavLink to="/patient_profile/<int:id>"
-                exact
+            <NavLink 
+                to="/patient_profile/<int:id>"
+                className = "nav-link"
             >
                 My Profile
             </NavLink>
-            <NavLink to="/signup"
-                exact
+            <NavLink 
+                to="/signup"
+                className = "nav-link"
             >
                 Signup
             </NavLink>
-            <NavLink to="/login"
-                exact
+            <NavLink 
+                to="/login"
+                className = "nav-link"
             >
                 Login
             </NavLink>
