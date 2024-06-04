@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 
-function LoginForm({patient, setLoggedIn}){
+function LoginForm({setLoggedIn, patient}){
 
     const initialValues = {
         username : "",
