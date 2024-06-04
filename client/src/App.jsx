@@ -6,7 +6,7 @@ import './App.css'
 import NavBar from './components/Navbar'
 
 function App() {
-  const [patient, setPatient] = useState(null)
+  // const [patient, setPatient] = useState(null)
   const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(()=>{
@@ -14,7 +14,6 @@ function App() {
     .then(r =>{
       if (r.ok){
         r.json().then(patient=>{
-          setPatient(patient)
           setLoggedIn(true)
       });
       };
@@ -26,7 +25,7 @@ function App() {
       <header>
         <NavBar/>
       </header>
-      <Outlet context={{patient:patient, loggedIn: loggedIn, setLoggedIn: setLoggedIn}}/>
+      <Outlet context={loggedIn}/>
     </>
   );
 }

@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {Outlet} from "react-router-dom"
+import {useOutletContext} from "react-router-dom"
 import Appointments from '../components/Appointments';
 
 
 function Home(){
-    // const {loggedIn} = useOutletContext() //Work this out to see if this work
+    const {loggedIn} = useOutletContext() //Work this out to see if this work
     
     if(loggedIn){
         <>
@@ -42,7 +42,7 @@ function Home(){
                     We care just like Mama did for you!
                 </h3>
                 <div>
-                    {textToDisplay}
+                    Please log in to use our services or check our physicians
                 </div>
             </main>
         </>
