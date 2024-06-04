@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import {Outlet} from "react-router-dom"
+import Appointments from '../components/Appointments';
 
 
 function Home(){
@@ -21,6 +23,7 @@ function Home(){
     return(
         <>
             <header>MaMa by My Medical Group</header>
+            <Outlet/>
             <main>
                 <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
