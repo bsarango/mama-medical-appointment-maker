@@ -1,17 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 function AppointmentForm(){
-
-    const [physicians, setPhysicians] = 
-
-    useEffect(()=>{
-        fetch("/physicians_index")
-        .then(r=>{
-            if(r.ok){
-                r.json().then(physicianList=>setPhysicians(physicianList))
-            }
-        });
-    }, []);
 
     const initialValues = {
         title : "",
