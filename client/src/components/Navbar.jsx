@@ -17,7 +17,7 @@ function NavBar(){
             Physicians
             </NavLink>
             <NavLink 
-                to="/patient_profile/<int:id>"
+                to="/patient_profile"
                 className = "nav-link"
             >
             My Profile
