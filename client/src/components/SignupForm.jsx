@@ -2,77 +2,76 @@ import React, {useState} from 'react'
 
 function SignupForm(){
 
-    const initialValues = {
-        username : "",
-        password : "",
-        name : "",
-        dob : "",
-        address : "",
-        phoneNumber : "", 
-    };
+    // const initialValues = {
+    //     username : "",
+    //     password : "",
+    //     name : "",
+    //     dob : "",
+    //     address : "",
+    //     phoneNumber : "", 
+    // };
 {/*Don't forget to adjust phoneNumber key syntax when fetching to POST in backend */}
 
-    const [newPatientInfo, setNewPatientInfo] = useState(initialValues)
+    // const [newPatientInfo, setNewPatientInfo] = useState(initialValues)
 
-    function handleChange(e){
-        valueName = e.target.name;
-        value = e.target.value;
-        setNewPatientInfo({
-            ...newPatientInfo, [valueName]:value
-        });
-    };
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
+    const [address, setAddress] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
 
     function handleSubmit(e){
+        const formValues = {
+            username:username,
+            password:password,
+            name:name,
+            address:address,
+            phoneNumber:phoneNumber
+        }
         e.preventDefault()
-        console.log(newPatientInfo)
+        console.log(formValues)
     }
 
     return(
         <div>
-            <form className = "userForm">
-                <label>Username</label>
+            <form className = "userForm" onSubmit={handleSubmit}>
+                <label htmlFor="username">Username</label>
                 <input
                     type = "text"
                     name = "username"
-                    value = {newPatientInfo.username}
-                    onChange = {handleChange}
+                    value = {username}
+                    onChange = {e=>setUsername(e.target.value)}
                 />
-                <label>Password</label>
+                <label htmlFor="password">Password</label>
                 <input
                     type = "text"
                     name = "password"
-                    value = {newPatientInfo.password}
-                    onChange = {handleChange}
+                    value = {password}
+                    onChange = {e=>setPassword(e.target.value)}
                 />
-                <label>Full Name</label>
+                <label htmlFor='name'>Full Name</label>
                 <input
                     type = "text"
                     name = "name"
-                    value = {newPatientInfo.name}
-                    onChange = {handleChange}
-                />
-                <label>Username</label>
-                <input
-                    type = "text"
-                    name = "username"
-                    value = {newPatientInfo.username}
-                    onChange = {handleChange}
+                    value = {name}
+                    onChange = {e=>setName(e.target.value)}
                 />
                 {/*Add input for DOB */}
-                <label>Address</label>
+                <label htmlFor='address'>Address</label>
                 <input
                     type = "text"
                     name = "address"
-                    value = {newPatientInfo.address}
-                    onChange = {handleChange}
+                    value = {address}
+                    onChange = {e=>setAddress(e.target.value)}
                 />
-                <label>Phone Number</label>
+                <label htmlFor='phoneNumber'>Phone Number</label>
                 <input
                     type = "text"
                     name = "phoneNumber"
-                    value = {newPatientInfo.phoneNumber}
-                    onChange = {handleChange}
+                    value = {phoneNumber}
+                    onChange = {e=>setPhoneNumber(e.target.value)}
                 />
+                <button type="submit">Submit</button>
             </form>
         </div>
     );

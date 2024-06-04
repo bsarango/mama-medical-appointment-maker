@@ -15,14 +15,6 @@ function LoginForm({setLoggedIn}){
         setLoggedIn(true)
     };
 
-    // function handleChange(e){
-    //     valueName = e.target.username
-    //     value = e.target.value
-    //     setPatientCredentials(
-    //         {...patientCredentials,[valueName]: value}
-    //     );
-    // };
-
     return(
         <div>
             <h2>Please Enter Your Username and Password to Login!</h2>
