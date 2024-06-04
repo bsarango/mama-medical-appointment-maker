@@ -4,7 +4,7 @@ import Appointments from '../components/Appointments';
 
 
 function Home(){
-
+    // const {loggedIn} = useOutletContext() //Work this out to see if this work
     const textToDisplay = ()=>{
         if(loggedIn){
         const loggedInText = (
@@ -23,7 +23,6 @@ function Home(){
     return(
         <>
             <header>MaMa by My Medical Group</header>
-            <Outlet/>
             <main>
                 <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!

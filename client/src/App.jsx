@@ -26,7 +26,7 @@ function App() {
       <header>
         <NavBar/>
       </header>
-      <Outlet/>
+      <Outlet context={{patient:patient, loggedIn: loggedIn, setLoggedIn: setLoggedIn}}/>
     </>
   );
 }
