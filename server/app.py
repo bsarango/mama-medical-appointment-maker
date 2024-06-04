@@ -23,10 +23,10 @@ def index():
 def not_found(e):
     return render_template("index.html")
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template("index.html")
+# @app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+# def catch_all(path):
+#     return render_template("index.html")
 
 class Patients_By_Id(Resource):
     
