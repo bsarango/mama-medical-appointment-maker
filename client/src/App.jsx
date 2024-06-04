@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
 import NavBar from './components/NavBar'
 import Appointments from './components/Appointments'
 
@@ -22,33 +21,12 @@ function App() {
     });
   },[]);
 
-  const textToDisplay = ()=>{
-    if(loggedIn){
-      const loggedInText = (
-      <>
-        <h3>
-          Welcome {patient.name}. Please feel free to check any physicians, make an appointment, or manage any existing ones.
-        </h3>
-        <Appointments appointments = {patient.appointments}/>
-      </>
-      )
-      return loggedInText
-    };
-    return <h3>Welcome to the online app. Please log in to make an appointment or manage appointments. You can create an account if you are new to our services.</h3>
-  };
+  
 
   return (
-    <>
+    <header>
       <NavBar/>
-      <div>
-        <h1>MaMa by My Medical Group</h1>
-        <h3>Appointment making system focused on helping you obtain the best care for you needs.
-          We care just like Mama did for you!
-        </h3>
-      </div>
-      <div>
-        {textToDisplay}
-      </div>
+      
 
       {/* <div>
         <a href="https://vitejs.dev" target="_blank">
@@ -70,7 +48,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p> */}
-    </>
+    </header>
   );
 }
 
