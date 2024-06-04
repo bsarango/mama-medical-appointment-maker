@@ -8,7 +8,7 @@ function Login({loggedIn, setLoggedIn, patient}){
 
     return(
         <div>
-            <h3>Enter your credentials below and press submit to Sign In</h3>
+            {/* <h3>Enter your credentials below and press submit to Sign In</h3> */}
             <LoginForm setLoggedIn={setLoggedIn} patient={patient}/>
         </div>
     );
