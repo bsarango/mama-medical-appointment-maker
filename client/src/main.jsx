@@ -7,6 +7,7 @@ import Signup from './pages/Signup'
 import Home from './pages/Home'
 import './index.css'
 import AppointmentRequest from './pages/AppointmentRequest'
+import PatientProfile from './pages/PatientProfile'
 
 const router = createBrowserRouter ([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter ([
       {
         path:"/make_appointment",
         element: <AppointmentRequest/>
+      },
+      {
+        path:"/patient_profile",
+        element:<PatientProfile/>
       }
     ]
   }
