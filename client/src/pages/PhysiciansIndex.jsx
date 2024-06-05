@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from React;
+import React,{useState, useEffect} from 'react';
 import Physician from '../components/Physician'
 
 function PhysiciansIndex(){
@@ -19,9 +19,10 @@ function PhysiciansIndex(){
     })
 
     return(
-        <>
-            {physiciansList}
-        </>
+        <div>
+            <h2>A list of our Physicians</h2>
+            <div>{physiciansList}</div>
+        </div>
     )
 }
 
