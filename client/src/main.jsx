@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import './index.css'
 import AppointmentRequest from './pages/AppointmentRequest'
 import PatientProfile from './pages/PatientProfile'
+import PhysiciansIndex from './pages/PhysiciansIndex'
 
 const router = createBrowserRouter ([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter ([
       {
         path:"/patient_profile",
         element:<PatientProfile/>
+      }
+      {
+        path:"/physicians_index",
+        element:<PhysiciansIndex/>
       }
     ]
   }
