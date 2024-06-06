@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Appointment from '../components/Appointment'
 
 function Appointments(){
 
@@ -38,13 +39,7 @@ function Appointments(){
 // Create an appointment component to manage props to and to create this JSX inside
     const appointmentsToDisplay = (appointments).map((appointment)=>{
         return(
-            <div>
-                <h3>{appointment.title}</h3>
-                <h3>{appointment.date_and_time}</h3> {/*Make this look readable */}
-                <h3>{appointment.details}</h3>
-                <button onClick={handleUpdate}>Update Appointment</button>
-                <button onClick={handleDelete}>Cancel Appointment</button>
-            </div>
+            <Appointment/>
         );
     })
 
