@@ -33,7 +33,14 @@ function AppointmentForm({physicians, createAppointment}){
             physician : selectedPhysicain,
         }
 
-        fetch('/appointments',{/*Code for post*/})
+        fetch('/appointments',
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body : JSON.stringify(appointmentObj),
+        })
         .then(r=>{if(r.ok){
             r.json().then(newAppointment=>console.log("New Appointment Made!"))
         }})
