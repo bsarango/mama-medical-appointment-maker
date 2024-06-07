@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
-function AppointmentForm(){
+function AppointmentForm({physicians, createAppointment}){
 
+    //Remove this
     const initialValues = {
         title : "",
         dateAndTime : "",
@@ -9,7 +10,13 @@ function AppointmentForm(){
         details: "",
     };
 
-    const [appointment, setAppointment] = useState(initialValues)
+    const [appointment, setAppointment] = useState(initialValues) //Remove this
+
+    const [title, setTitle] = useState("")
+    const [date, setDate] = useState("")
+    const [time, setTime] = useState("")
+    const [specialty, setSpecialty] = useState("")
+    const [details, setDetails] = useState("")
 
     // const physicianOptions = physicians.map(physician=>{
     //     return (
