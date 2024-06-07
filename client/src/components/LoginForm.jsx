@@ -7,11 +7,21 @@ function LoginForm({setLoggedIn}){
 
     function handleSubmit(e){
         e.preventDefault();
-        const patientCredentials = {
-            username: username,
-            password: password,
+        const credentialsObj = {
+            username : username,
+            password : password
         }
-        console.log(patientCredentials);
+        fetch('http://127.0.0.1:3000/login',
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body : JSON.stringify(credentialsObj),
+        })
+        .then(r=>{if(r.ok){
+            r.json().then(signedInPatient=>console.log(signedInPatient,"New Appointment Made!"))
+        }})
         setLoggedIn(true)
     };
 
