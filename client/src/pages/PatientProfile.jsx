@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 import PatientDetails from '../components/PatientDetails'
 // import Appointments from '../components/Appointments'
 import Appointment from "../components/Appointment"
@@ -30,7 +31,9 @@ function PatientProfile({loggedIn, patient}){
                 <PatientDetails patient={patient}/>
                 {/* <Appointments patient = {patient}/> */}
                 <div>{displayAppointments}</div>
-
+                <Link to="/make_appointment">
+                    <button>Make a New Appointment</button>
+                </Link>
             </div>
         )
     };
