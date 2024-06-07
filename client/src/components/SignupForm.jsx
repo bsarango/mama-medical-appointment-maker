@@ -22,7 +22,14 @@ function SignupForm(){
             phoneNumber:phoneNumber
         }
         
-        fetch("/signup",{/*Code for post*/})
+        fetch("/signup",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body : JSON.stringify(formValues),
+        })
         .then(r=>{
             if(r.ok){
                 r.json().then(newPatient=>console.log("SignedUp"))
