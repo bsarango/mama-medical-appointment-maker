@@ -1,8 +1,7 @@
 import React,{useState} from 'react'
 
-const [updateAppointment, setUpdateAppointment] = useState(false)
-
 function Appointment({appointment, setAppointment}){
+    const [updateAppointment, setUpdateAppointment] = useState(false)
     
     function displayUpdateOptions(){
         if(updateAppointment){

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Calender from './Calender';
 
 function AppointmentForm({physicians, createAppointment}){
 
@@ -40,6 +41,8 @@ function AppointmentForm({physicians, createAppointment}){
                     value = {appointment.name}
                     onChange = {handleChange}
                 />
+                <label>Select a date</label>
+                <Calender setDate={setDate}/>
             </form>
         </div>
     );
