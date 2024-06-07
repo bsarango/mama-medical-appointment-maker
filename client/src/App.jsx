@@ -22,6 +22,7 @@ function App() {
     <>
       <header>
         <NavBar/>
+        <button onClick={e=>{setLoggedIn(false)}}>LogOut</button>
       </header>
       <Outlet context={{patient:[patient, setPatient],loggedIn:[loggedIn,setLoggedIn]}}/>
     </>

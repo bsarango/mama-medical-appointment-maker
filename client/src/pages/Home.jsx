@@ -4,7 +4,7 @@ import Appointments from '../components/Appointments';
 
 
 function Home(){
-    const {loggedIn} = useOutletContext() //Work this out to see if this work
+    const{patient, loggedIn} = useOutletContext() 
     
     if(loggedIn){
         <>
