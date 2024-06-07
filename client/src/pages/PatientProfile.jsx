@@ -17,7 +17,7 @@ function PatientProfile({loggedIn, patient}){
     })
 
     const displayAppointments = appointments.map(appointment=>{
-        return <Appointment key={appointment.id} />
+        return <Appointment key={appointment.id} appointment={appointment} setAppointments={setAppointments}/>
     })
     
 
