@@ -2,16 +2,6 @@ import React, {useState, useEffect} from 'react';
 
 function AppointmentForm({physicians, createAppointment}){
 
-    //Remove this
-    const initialValues = {
-        title : "",
-        dateAndTime : "",
-        specialty: "",
-        details: "",
-    };
-
-    const [appointment, setAppointment] = useState(initialValues) //Remove this
-
     const [title, setTitle] = useState("")
     const [date, setDate] = useState("")
     const [time, setTime] = useState("")
@@ -30,16 +20,12 @@ function AppointmentForm({physicians, createAppointment}){
     //     )
     // });
 
-    function handleChange(e){
-        valueName = e.target.name;
-        value = e.target.value.name;
-        setAppointment(
-            {...appointment,[valueName]:value}
-        );
-    };
-
     function handleSubmit(e){
         e.preventDefault();
+        fetch('/appointments',{/*Code for post*/})
+        .then(r=>{if(r.ok){
+            r.json().then(new_appointment=>console.log("New Appointment Made!"))
+        }})
         console.log(appointment)
     }
 //Make a scroll down to select physician for the appointment
