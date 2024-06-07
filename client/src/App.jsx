@@ -8,7 +8,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(()=>{
-    fetch("/check_session")
+    fetch("http://127.0.0.1:3000/check_session")
     .then(r =>{
       if (r.ok){
         r.json().then(patient=>{

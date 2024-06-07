@@ -6,7 +6,7 @@ function PhysiciansIndex(){
     const [physicians, setPhysicians] = useState([])
 
     useEffect(()=>{
-        fetch('/physicians_index')
+        fetch('http://127.0.0.1:3000/physicians_index')
         .then(r=>{
             if(r.ok){
                 r.json().then(physiciansIndex => setPhysicians(physiciansIndex));
