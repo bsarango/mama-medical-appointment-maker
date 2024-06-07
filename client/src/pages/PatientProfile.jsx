@@ -9,7 +9,7 @@ function PatientProfile({loggedIn, patient}){
     const [appointments, setAppointments] = useState([])
 
     useEffect(()=>{
-        fetch('/appointments')
+        fetch('http://127.0.0.1:3000/appointments')
         .then(r => {if(r.ok){
             r.json().then(appointments=>setAppointments(appointments))
             }
