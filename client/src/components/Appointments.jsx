@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Appointment from '../components/Appointment'
+import Appointment from './components/Appointment'
 
 function Appointments(){
 
@@ -39,7 +39,7 @@ function Appointments(){
 // Create an appointment component to manage props to and to create this JSX inside
     const appointmentsToDisplay = (appointments).map((appointment)=>{
         return(
-            <Appointment/>
+            <Appointment appointment={appointment} onUpdate={handleAppointmentUpdate} onDelete={handleCanceledAppointment}/>
         );
     })
 

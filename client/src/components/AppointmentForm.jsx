@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function AppointmentForm(){
 
@@ -27,7 +27,7 @@ function AppointmentForm(){
         valueName = e.target.name;
         value = e.target.value.name;
         setAppointment(
-            {...appointment,[valueName]: value}
+            {...appointment,[valueName]:value}
         );
     };
 
@@ -35,7 +35,7 @@ function AppointmentForm(){
         e.preventDefault();
         console.log(appointment)
     }
-
+//Make a scroll down to select physician for the appointment
     return(
         <div>
             <h2>Please enter all the fields </h2>
