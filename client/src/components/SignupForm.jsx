@@ -3,17 +3,6 @@ import Calender from './Calender'
 
 function SignupForm(){
 
-    // const initialValues = {
-    //     username : "",
-    //     password : "",
-    //     name : "",
-    //     dob : "",
-    //     address : "",
-    //     phoneNumber : "", 
-    // };
-{/*Don't forget to adjust phoneNumber key syntax when fetching to POST in backend */}
-
-    // const [newPatientInfo, setNewPatientInfo] = useState(initialValues)
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
