@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Calender from './Calender';
+import TimePicker from './TimePicker'
 
 function AppointmentForm({physicians, createAppointment}){
 
@@ -7,27 +8,36 @@ function AppointmentForm({physicians, createAppointment}){
     const [date, setDate] = useState("")
     const [time, setTime] = useState("")
     const [specialty, setSpecialty] = useState("")
-    const [details, setDetails] = useState("")
+    const [selectedPhysicain, setSelectedPhysician] = useState(null)
 
-    // const physicianOptions = physicians.map(physician=>{
-    //     return (
-    //         <div>
-    //             <img>{physician.image}</img>
-    //             <h4>Dr. {physician.first_name} {physician.last_name}</h4>
-    //             <button>
-    //                 Set Appointment
-    //             </button>
-    //         </div>
-    //     )
-    // });
+    const physicianOptions = physicians.map(physician=>{
+        return (
+            <option 
+                key={physician.id} 
+                value={physician.id}
+            >
+                <img>{physician.image}</img>
+                <h4>Dr. {physician.first_name} {physician.last_name}</h4>
+            </option>
+        )
+    });
 
     function handleSubmit(e){
         e.preventDefault();
+
+        const appointmentObj = {
+            title : title,
+            dateAndTime : date + "-" + time,
+            specialty : specialty,
+            details : `Please be ready for your upcoming ${title} appointment. Please come with your medical history, insurance card, and any health concerns you have prior to the appointment. We look forward to seeing you!`,
+            physician : selectedPhysicain,
+        }
+
         fetch('/appointments',{/*Code for post*/})
         .then(r=>{if(r.ok){
-            r.json().then(new_appointment=>console.log("New Appointment Made!"))
+            r.json().then(newAppointment=>console.log("New Appointment Made!"))
         }})
-        console.log(appointment)
+        console.log(newAppointment)
     }
 //Make a scroll down to select physician for the appointment
     return(
@@ -39,10 +49,16 @@ function AppointmentForm({physicians, createAppointment}){
                     type = "text"
                     name = "title"
                     value = {appointment.name}
-                    onChange = {handleChange}
+                    onChange = {(e)=>{setTitle(e.target.value)}}
                 />
                 <label>Select a date</label>
-                <Calender setDate={setDate}/>
+                    <Calender setDate={setDate}/>
+                <label>Select a Time</label>
+                    <TimePicker setTime={setTime}/>
+                <label>Select Physician</label>
+                <select onChange={(e)=>{setSelectedPhysician(e.target.value)}}>
+                    {physicianOptions}
+                </select>
             </form>
         </div>
     );
