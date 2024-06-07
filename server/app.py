@@ -17,7 +17,7 @@ from models import Patient, Physician, Appointment
 # @app.route('/')
 # def index():
 #     return '<h1>Phase 4 Project Server</h1>'
-class Index('/')
+class Index('/'):
     def get():
         return send_from_directory("../client/dist", "index.html")
 
