@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useOutletContext} from "react-router-dom"
+import {Link,useOutletContext} from "react-router-dom"
 import Appointments from '../components/Appointments';
 
 
@@ -14,8 +14,14 @@ function Home(){
                     We care just like Mama did for you!
             </h3>
             <div>
-                Please choose any of the following to make an appointment
+                Please choose any of the following options for our services
             </div>
+            <Link to="/make_appointment">
+                <button>Create an Appointment</button>
+            </Link>
+            <Link to="patient_profile">
+                <button>View your current Appointments</button>
+            </Link>
         </main>
         </>
     }
