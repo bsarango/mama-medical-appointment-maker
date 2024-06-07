@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Calender from './Calender'
 
 function SignupForm(){
 
@@ -17,18 +18,27 @@ function SignupForm(){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
+    const [dob, setDob] = useState("")
     const [address, setAddress] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
 
     function handleSubmit(e){
+        e.preventDefault()
         const formValues = {
             username:username,
             password:password,
             name:name,
+            dob:dob,
             address:address,
             phoneNumber:phoneNumber
         }
-        e.preventDefault()
+        
+        fetch("/signup",{/*Code for post*/})
+        .then(r=>{
+            if(r.ok){
+                r.json().then(newPatient=>console.log("SignedUp"))
+            }
+        })
         console.log(formValues)
     }
 
@@ -56,7 +66,8 @@ function SignupForm(){
                     value = {name}
                     onChange = {e=>setName(e.target.value)}
                 />
-                {/*Add input for DOB */}
+                <label htmlFor='dob'>Date of Birth</label>
+                <Calender setDate={setDob}/>
                 <label htmlFor='address'>Address</label>
                 <input
                     type = "text"
