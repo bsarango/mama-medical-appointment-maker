@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Link,useOutletContext} from "react-router-dom"
+import {Link, useOutletContext} from "react-router-dom"
 import Appointments from '../components/Appointments';
 
 
