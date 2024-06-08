@@ -17,10 +17,6 @@ function PatientProfile({loggedIn, patient}){
         )
     })
 
-    const displayAppointments = appointments.map(appointment=>{
-        return <Appointment key={appointment.id} appointment={appointment} setAppointments={setAppointments}/>
-    })
-    
     function updateAppointments(updatedAppointment){
         const updatedAppointmentList = appointments.map(appointment=>{
             if(appointment.id === updatedAppointment.id){
@@ -30,6 +26,11 @@ function PatientProfile({loggedIn, patient}){
         })
         setAppointments(updatedAppointmentList)
     }
+    
+    const displayAppointments = appointments.map(appointment=>{
+        return <Appointment key={appointment.id} appointment={appointment} onUpdateAppointment={updateAppointments}/>
+    })
+    
 
     if(loggedIn){
         return(
