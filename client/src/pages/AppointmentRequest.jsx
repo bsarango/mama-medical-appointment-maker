@@ -14,17 +14,6 @@ function AppointmentRequest(){
         });
     }, []);
 
-    function addAppointment(e){
-        e.preventDefault()
-        fetch("/appointments",{/*Add post code8*/})
-        .then(r=>{
-            if(r.ok){
-                r.json()
-                .then(newAppointment=>console.log("Appointment Added"))
-            }
-        });
-    }
-
     return(
         <div>
             <h2>Enter the information for your Appointment</h2>

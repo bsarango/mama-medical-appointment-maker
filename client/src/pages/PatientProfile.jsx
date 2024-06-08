@@ -21,6 +21,15 @@ function PatientProfile({loggedIn, patient}){
         return <Appointment key={appointment.id} appointment={appointment} setAppointments={setAppointments}/>
     })
     
+    function updateAppointments(updatedAppointment){
+        const updatedAppointmentList = appointments.map(appointment=>{
+            if(appointment.id === updatedAppointment.id){
+                return updatedAppointment
+            }
+            return appointment
+        })
+        setAppointments(updatedAppointmentList)
+    }
 
     if(loggedIn){
         return(

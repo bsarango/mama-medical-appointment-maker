@@ -1,13 +1,18 @@
 import React,{useState} from 'react'
+import Calender from './Calender'
+import TimePicker from './TimePicker'
 
-function Appointment({appointment, setAppointment}){
+function Appointment({appointment, onUpdateAppointment}){
     const [updateAppointment, setUpdateAppointment] = useState(false)
-    
+    const [time, setTime] = useState("")
+    const [date, setDate] = useState("")
+
     function displayUpdateOptions(){
         if(updateAppointment){
             return (
                 <form onSubmit ={handleUpdate}>
-                    <>{/*Display calender and clock*/}</>
+                    <Calender setDate = {setDate}/>
+                    <TimePicker setTime={setTime}/>
                     <button type="submit">Update Appointment</button>
                 </form>
             )
@@ -16,14 +21,25 @@ function Appointment({appointment, setAppointment}){
 
     function handleUpdate(e){
         e.preventDefault()
-        fetch(`/appointment/${appointment.id}`,{/*set Patch request*/})
+
+        const appointmentValues = {
+            dateAndTime : date + "-" + time,
+        }
+
+        fetch(`/appointment/${appointment.id}`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type":"application/json",
+            },
+            body: JSON.stringify(appointmentValues)
+        })
         .then(r=>{if(r.ok){
             r.json().then(
-                updatePatient=>console.log("Appointment updated")
+                updatedAppointment=>onUpdateAppointment(updatedAppointment)
             )
         }
         })
-        {/*Add function to map out new appointments*/}
+        
     }
 
     function handleCancelation(e){
