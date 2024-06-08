@@ -34,15 +34,14 @@ function PatientProfile({loggedIn, patient}){
 
     if(loggedIn){
         return(
-            <div>
+            <div className = "container">
                 <h3>
                     View your current appointments and information. You can cancel or update your appointment by selecting the respective option.
                 </h3>
                 <PatientDetails patient={patient}/>
-                {/* <Appointments patient = {patient}/> */}
                 <div>{displayAppointments}</div>
                 <Link to="/make_appointment">
-                    <button>Make a New Appointment</button>
+                    <button className = "button">Make a New Appointment</button>
                 </Link>
             </div>
         )
