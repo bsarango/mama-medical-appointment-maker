@@ -4,9 +4,9 @@ import {NavLink} from 'react-router-dom'
 function NavBar(){
     return(
         <nav >
-            <NavLink class="bg-gray-800"
+            <NavLink 
                 to="/"
-                className = "nav-link"
+                className = "nav-link bg-gray-800"
             >
             Home
             </NavLink>

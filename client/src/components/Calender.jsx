@@ -11,10 +11,16 @@ function Calender({setDate}){
 
     const [value, setValue] = useState(dayjs(todayString));
 
+    function getSimpleDate(dateValue){
+        const date = new Date(dateValue)
+        const finalDate = date.getFullYear() + '-' +  (date.getMonth() + 1)  + '-' +  date.getDate()
+        setDate(finalDate)
+    }
+
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div className = "formContainer">    
-            <DateCalendar value={value} onChange={(newValue) => {setValue(newValue); setDate(newValue);}} />
+            <DateCalendar value={value} onChange={(newValue) => {setValue(newValue),getSimpleDate(newValue)}} />
             </div>
         </LocalizationProvider>
     );

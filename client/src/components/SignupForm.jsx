@@ -22,7 +22,7 @@ function SignupForm(){
             phoneNumber:phoneNumber
         }
         
-        fetch("/signup",
+        fetch("http://127.0.0.1:5555/signup",
         {
             method: "POST",
             headers: {
@@ -32,7 +32,8 @@ function SignupForm(){
         })
         .then(r=>{
             if(r.ok){
-                r.json().then(newPatient=>console.log("SignedUp"))
+                r.json()
+                .then(newPatient=>{console.log(newPatient),console.log("Signup successful")})
             }
         })
         console.log(formValues)
