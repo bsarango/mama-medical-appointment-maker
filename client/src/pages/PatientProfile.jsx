@@ -1,11 +1,12 @@
 import React,{useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import PatientDetails from '../components/PatientDetails'
-// import Appointments from '../components/Appointments'
+import {useOutletContext} from "react-router-dom"
 import Appointment from "../components/Appointment"
 
-function PatientProfile({loggedIn, patient}){
+function PatientProfile(){
 
+    const {patient, loggedIn} = useOutletContext()
     const [appointments, setAppointments] = useState([])
 
     useEffect(()=>{
@@ -32,13 +33,13 @@ function PatientProfile({loggedIn, patient}){
     })
     
 
-    if(loggedIn){
+    if(loggedIn[0]){
         return(
             <div className = "container">
                 <h3>
                     View your current appointments and information. You can cancel or update your appointment by selecting the respective option.
                 </h3>
-                <PatientDetails patient={patient}/>
+                <PatientDetails patient={patient[0]}/>
                 <div>{displayAppointments}</div>
                 <Link to="/make_appointment">
                     <button className = "button">Make a New Appointment</button>
