@@ -15,7 +15,7 @@ function PhysiciansIndex(){
     },[])
 
     const physiciansList = physicians.map(physician=>{
-        return <Physician physician={physician}/>
+        return <Physician key={physician.id} physician={physician}/>
     })
 
     return(
