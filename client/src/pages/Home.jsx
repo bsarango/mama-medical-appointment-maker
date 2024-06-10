@@ -8,7 +8,7 @@ function Home(){
     
     if(loggedIn){
         <>
-        <header>MaMa by My Medical Group</header>
+        <header id="title">MaMa by My Medical Group</header>
         <main>
             <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
