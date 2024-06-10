@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import {Link, useOutletContext} from "react-router-dom"
-import Appointments from '../components/Appointments';
 
 
 function Home(){
@@ -9,7 +8,7 @@ function Home(){
     if(loggedIn){
         <>
         <header id="title">MaMa by My Medical Group</header>
-        <main>
+        <main class = "container">
             <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
             </h3>
@@ -25,25 +24,12 @@ function Home(){
         </main>
         </>
     }
-    // const textToDisplay = ()=>{
-    //     if(loggedIn){
-    //     const loggedInText = (
-    //     <>
-    //         <h3>
-    //         Welcome {patient.name}. Please feel free to check any physicians, make an appointment, or manage any existing ones.
-    //         </h3>
-    //         <Appointments appointments = {patient.appointments}/>
-    //     </>
-    //     )
-    //     return loggedInText
-    //     };
-    //     return <h3>Welcome to the online app. Please log in to make an appointment or manage appointments. You can create an account if you are new to our services.</h3>
-    // };
+    
 
     return(
         <>
             <header>MaMa by My Medical Group</header>
-            <main>
+            <main className="container">
                 <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
                 </h3>
