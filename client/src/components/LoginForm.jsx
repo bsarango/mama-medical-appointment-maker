@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 
-function LoginForm({setLoggedIn}){
+function LoginForm({setPatient, setLoggedIn}){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
@@ -20,9 +20,9 @@ function LoginForm({setLoggedIn}){
             body : JSON.stringify(credentialsObj),
         })
         .then(r=>{if(r.ok){
-            r.json().then(signedInPatient=>console.log(signedInPatient,"New Appointment Made!"))
+            r.json().then(signedInPatient=>{console.log(signedInPatient), setPatient(signedInPatient),setLoggedIn(true)})
         }})
-        setLoggedIn(true)
+        
     };
 
     return(

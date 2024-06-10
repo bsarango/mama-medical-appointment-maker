@@ -12,7 +12,7 @@ function App() {
     .then(r =>{
       if (r.ok){
         r.json().then(patient=>{
-          setLoggedIn(true)
+          setLoggedIn(true), setPatient(patient)
       });
       };
     });
