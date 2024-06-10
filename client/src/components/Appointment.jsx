@@ -26,7 +26,7 @@ function Appointment({appointment, onUpdateAppointment}){
             dateAndTime : date + "-" + time,
         }
 
-        fetch(`/appointment/${appointment.id}`,{
+        fetch(`http://127.0.0.1:5555/appointment/${appointment.id}`,{
             method: "PATCH",
             headers: {
                 "Content-Type":"application/json",
@@ -43,7 +43,7 @@ function Appointment({appointment, onUpdateAppointment}){
     }
 
     function handleCancelation(e){
-        fetch(`appointment/${appointment.id}`,{/*Fetch body for delete*/})
+        fetch(`http://127.0.0.1:5555/appointment/${appointment.id}`,{/*Fetch body for delete*/})
         .then(r=>{if(r.ok){
             r.json().then(
                 updatePatient=>console.log("Appointment Deleted")
