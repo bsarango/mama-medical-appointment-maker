@@ -7,8 +7,8 @@ function Home(){
     
     if(loggedIn){
         <>
-        <header id="title">MaMa by My Medical Group</header>
-        <main class = "container">
+        
+        <main className = "container md:max-auto">
             <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
             </h3>
@@ -28,7 +28,6 @@ function Home(){
 
     return(
         <>
-            <header>MaMa by My Medical Group</header>
             <main className="container mx-auto px-4">
                 <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!

@@ -3,8 +3,8 @@ import {NavLink} from 'react-router-dom'
 
 function NavBar(){
     return(
-        <nav>
-            <NavLink 
+        <nav >
+            <NavLink class="bg-gray-800"
                 to="/"
                 className = "nav-link"
             >
