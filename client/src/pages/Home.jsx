@@ -29,7 +29,7 @@ function Home(){
     return(
         <>
             <header>MaMa by My Medical Group</header>
-            <main className="container">
+            <main className="container mx-auto px-4">
                 <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
                 </h3>
