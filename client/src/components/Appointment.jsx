@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Calender from './Calender'
 import TimePicker from './TimePicker'
 
-function Appointment({appointment, onUpdateAppointment}){
+function Appointment({appointment, onDeleteAppointment}){
     const [updateAppointment, setUpdateAppointment] = useState(false)
     const [time, setTime] = useState("")
     const [date, setDate] = useState("")
@@ -43,14 +43,13 @@ function Appointment({appointment, onUpdateAppointment}){
     }
 
     function handleCancelation(e){
-        fetch(`http://127.0.0.1:5555/appointment/${appointment.id}`,{/*Fetch body for delete*/})
-        .then(r=>{if(r.ok){
-            r.json().then(
-                updatePatient=>console.log("Appointment Deleted")
-            )
-        }
+        fetch(`http://127.0.0.1:5555/appointment/${appointment.id}`,
+        {
+            method: "DELETE",
         })
-        {/*Add deletion function*/}
+        .then(r=>{if(r.ok){r.json()
+            .then(()=>onDeleteAppointment(appointment))
+        }})
     }
 
 
@@ -61,7 +60,7 @@ function Appointment({appointment, onUpdateAppointment}){
             <h3>{appointment.details}</h3>
             <div>{displayUpdateOptions}</div>
             <button onClick={e=>{setUpdateAppointment(true)}}>Update Appointment</button>
-            <button onClick={handleDelete}>Cancel Appointment</button>
+            <button onClick={handleCancelation}>Cancel Appointment</button>
         </div>
     );
 }

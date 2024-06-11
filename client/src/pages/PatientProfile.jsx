@@ -18,18 +18,13 @@ function PatientProfile(){
         )
     })
 
-    function updateAppointments(updatedAppointment){
-        const updatedAppointmentList = appointments.map(appointment=>{
-            if(appointment.id === updatedAppointment.id){
-                return updatedAppointment
-            }
-            return appointment
-        })
-        setAppointments(updatedAppointmentList)
+    function removeAppointment(deletedAppointment){
+        const newAppointmentList = appointments.filter(appointment=>appointment.id!==deletedAppointment.id)
+        setAppointments(newAppointmentList)
     }
     
     const displayAppointments = appointments.map(appointment=>{
-        return <Appointment key={appointment.id} appointment={appointment} onUpdateAppointment={updateAppointments}/>
+        return <Appointment key={appointment.id} appointment={appointment} onDeleteAppointment={removeAppointment}/>
     })
     
 

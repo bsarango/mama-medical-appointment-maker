@@ -43,9 +43,8 @@ function AppointmentForm({physicians, createAppointment}){
             body : JSON.stringify(appointmentObj),
         })
         .then(r=>{if(r.ok){
-            r.json().then(newAppointment=>console.log("New Appointment Made!"))
+            r.json().then(newAppointment=>console.log(newAppointment))
         }})
-        console.log(newAppointment)
     }
 //Make a scroll down to select physician for the appointment
     return(
@@ -64,8 +63,11 @@ function AppointmentForm({physicians, createAppointment}){
                 <label>Select a Time</label>
                     <TimePicker setTime={setTime}/>
                 <label>Select Physician</label>
-                <select onChange={(e)=>{console.log(e.taget.value),setSelectedPhysician(e.target.value),setSpecialty(e.target.name)}}>
+                
+                {/* {()=>{setSelectedPhysician(physicians[0][id]),setSpecialty(physicians[0][specialty])}} */}
+                <select onChange={(e)=>{setSelectedPhysician(e.target.value),setSpecialty(e.target.name)}}>
                     {physicianOptions}
+                    {console.log(physicians)}
                 </select>
                 <button type="Submit">Make Appointment</button>
             </form>
