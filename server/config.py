@@ -37,7 +37,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://brian_sarango:lRwcRfvKH0mPNA5cpgt47LQ2CG7nxoBx@dpg-cp766re3e1ms73af9l20-a.ohio-postgres.render.com/my_database_r7u9"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
-app.secret_key = secrets.token_hex(16)
+# app.secret_key = secrets.token_hex(16)
+app.secret_key = b'\xb3\x93\xfe\xd0D\xd6%V\xda\xd0\x0e\x9b'
 
 
 # Define metadata, instantiate db
