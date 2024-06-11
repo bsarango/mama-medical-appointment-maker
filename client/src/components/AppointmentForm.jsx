@@ -15,9 +15,10 @@ function AppointmentForm({physicians, createAppointment}){
             <option 
                 key={physician.id} 
                 value={physician.id}
+                name = {physician.specialty}
             >
-                <img>{physician.image}</img>
-                <h4>Dr. {physician.first_name} {physician.last_name}</h4>
+                
+                Dr. {physician.first_name} {physician.last_name}
             </option>
         )
     });
@@ -33,7 +34,7 @@ function AppointmentForm({physicians, createAppointment}){
             physician : selectedPhysicain,
         }
 
-        fetch('/appointments',
+        fetch('http://127.0.0.1:5555/appointments',
         {
             method: "POST",
             headers: {
@@ -55,7 +56,7 @@ function AppointmentForm({physicians, createAppointment}){
                 <input
                     type = "text"
                     name = "title"
-                    value = {appointment.name}
+                    value = {title}
                     onChange = {(e)=>{setTitle(e.target.value)}}
                 />
                 <label>Select a date</label>
@@ -63,9 +64,10 @@ function AppointmentForm({physicians, createAppointment}){
                 <label>Select a Time</label>
                     <TimePicker setTime={setTime}/>
                 <label>Select Physician</label>
-                <select onChange={(e)=>{setSelectedPhysician(e.target.value)}}>
+                <select onChange={(e)=>{setSelectedPhysician(e.target.value),setSpecialty(e.target.name)}}>
                     {physicianOptions}
                 </select>
+                <button type="Submit">Make Appointment</button>
             </form>
         </div>
     );

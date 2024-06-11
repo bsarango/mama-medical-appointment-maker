@@ -4,25 +4,26 @@ import {Link, useOutletContext} from "react-router-dom"
 
 function Home(){
     const{loggedIn} = useOutletContext() 
-    
-    if(loggedIn){
-        <>
-        
-        <main className = "container md:max-auto">
-            <h3>Appointment making system focused on helping you obtain the best care for you needs.
+    console.log(loggedIn[0])
+    if(loggedIn[0]){
+        return(
+            <main className = "container md:max-auto">
+                <h3>Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
-            </h3>
-            <div>
-                Please choose any of the following options for our services
-            </div>
-            <Link to="/make_appointment">
-                <button>Create an Appointment</button>
-            </Link>
-            <Link to="patient_profile">
-                <button>View your current Appointments</button>
-            </Link>
-        </main>
-        </>
+                </h3>
+                <div>
+                    Please choose any of the following options for our services
+                    <br></br>
+                    <Link to="/make_appointment">
+                        <button>Create an Appointment</button>
+                    </Link>
+                    <br></br>
+                    <Link to="patient_profile">
+                        <button>View your current Appointments</button>
+                    </Link>
+                </div>
+            </main>
+        )
     }
     
 

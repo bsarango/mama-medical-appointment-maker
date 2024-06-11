@@ -17,7 +17,7 @@ function AppointmentRequest(){
     return(
         <div>
             <h2>Enter the information for your Appointment</h2>
-            <AppointmentForm createAppointment={addAppointment} physicians={physicians}/>
+            <AppointmentForm  physicians={physicians}/>
         </div>
         
     )
