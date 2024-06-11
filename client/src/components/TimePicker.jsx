@@ -4,16 +4,25 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimeField } from '@mui/x-date-pickers/TimeField';
 
-export default function TimeFieldValue({setTime}) {
-  const [value, setValue] = React.useState(dayjs('2022-04-17T15:30'));
+ function TimeFieldValue({setTime}) {
+  const [value, setValue] = useState(dayjs('2022-04-17T15:30'));
+
+  function setNewTime(newValue){
+    setValue(newValue)
+    const date = new Date(newValue)
+    const simpleDate = date.toTimeString('HH:mm')
+    setTime(simpleDate.split(':')[0]+'-'+simpleDate.split(':')[1])
+  }
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
         <TimeField
           label="Controlled field"
           value={value}
-          onChange={(newValue) => {setValue(newValue), setTime(newValue.split('T')[1])}}
+          onChange={(newValue) => {setNewTime(newValue)}}
         />
     </LocalizationProvider>
   );
 }
+
+export default TimeFieldValue

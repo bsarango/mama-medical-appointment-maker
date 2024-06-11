@@ -8,7 +8,7 @@ function AppointmentForm({physicians, createAppointment}){
     const [date, setDate] = useState("")
     const [time, setTime] = useState("")
     const [specialty, setSpecialty] = useState("")
-    const [selectedPhysicain, setSelectedPhysician] = useState(null)
+    const [selectedPhysician, setSelectedPhysician] = useState(null)
 
     const physicianOptions = physicians.map(physician=>{
         return (
@@ -31,9 +31,9 @@ function AppointmentForm({physicians, createAppointment}){
             dateAndTime : date + "-" + time,
             specialty : specialty,
             details : `Please be ready for your upcoming ${title} appointment. Please come with your medical history, insurance card, and any health concerns you have prior to the appointment. We look forward to seeing you!`,
-            physician : selectedPhysicain,
+            physician : selectedPhysician
         }
-
+        console.log(appointmentObj)
         fetch('http://127.0.0.1:5555/appointments',
         {
             method: "POST",
@@ -64,7 +64,7 @@ function AppointmentForm({physicians, createAppointment}){
                 <label>Select a Time</label>
                     <TimePicker setTime={setTime}/>
                 <label>Select Physician</label>
-                <select onChange={(e)=>{setSelectedPhysician(e.target.value),setSpecialty(e.target.name)}}>
+                <select onChange={(e)=>{console.log(e.taget.value),setSelectedPhysician(e.target.value),setSpecialty(e.target.name)}}>
                     {physicianOptions}
                 </select>
                 <button type="Submit">Make Appointment</button>
