@@ -67,7 +67,7 @@ class Appointments(Resource):
     def get(self):
 
         if session.get('patient_id'):
-            appointments = [appointment.to_dict() for appointment in Appointment.query.all() if Appointment.patient_id = session.get('patient_id')]
+            appointments = [appointment.to_dict() for appointment in Appointment.query.filter(Appointment.patient_id==session.get('patient_id')).all()]
             return appointments, 200
 
         return {'message': 'Patient not logged in, please login to continue'}, 401
