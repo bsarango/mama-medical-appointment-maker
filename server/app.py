@@ -14,12 +14,12 @@ from models import Patient, Physician, Appointment
 
 
 
-# @app.route('/')
-# def index():
-#     return '<h1>Phase 4 Project Server</h1>'
-class Index(Resource):
-    def get(self):
-        return send_from_directory("./client/dist", "index.html")
+@app.route('/')
+def index():
+    return '<h1>Phase 4 Project Server</h1>'
+# class Index(Resource):
+#     def get(self):
+#         return send_from_directory("./client/dist", "index.html")
 
 # Views go here! use either route!
 @app.errorhandler(404)
@@ -217,7 +217,7 @@ class Logout(Resource):
             
         return {'error': 'Unable to log out. Patient not logged in'}, 401
 		
-api.add_resource(Index,"/")
+# api.add_resource(Index,"/")
 api.add_resource(Patients_By_Id, "/patient_profile/<int:id>")
 api.add_resource(Appointments, "/appointments")
 api.add_resource(Appointments_By_Id, "/appointments/<int:id>")
