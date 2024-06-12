@@ -67,7 +67,7 @@ class Appointments(Resource):
     def get(self):
 
         if session.get('patient_id'):
-            appointments = [appointment.to_dict() for appointment in Appointment.query.all()]
+            appointments = [appointment.to_dict() for appointment in Appointment.query.all() if Appointment.patient_id = session.get('patient_id')]
             return appointments, 200
 
         return {'message': 'Patient not logged in, please login to continue'}, 401
@@ -158,13 +158,13 @@ class Physicians_By_Id(Resource):
 
 class CheckSession(Resource):
     
-        def get(self):
-            patient = Patient.query.filter(Patient.id == session.get('patient_id')).first()
+    def get(self):
+        patient = Patient.query.filter(Patient.id == session.get('patient_id')).first()
 
-            if patient:
-                return patient.to_dict(), 200
+        if patient:
+            return patient.to_dict(), 200
             
-            return {'error':'Patient not signed in. Please sign in.'} , 401
+        return {'error':'Patient not signed in. Please sign in.'} , 401
 
 
 class SignUp(Resource):
