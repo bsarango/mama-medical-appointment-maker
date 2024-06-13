@@ -7,7 +7,7 @@ function Login(){
     const {patient, loggedIn} = useOutletContext()
     //Have some conditional to check that the user if logged in
     if (loggedIn[0]){
-        return(<h3>Hi {patient[0].name}. You're already logged in!</h3>)
+        return(<h3 className="text-center bg-yellow-100">Hi {patient[0].name}. You're already logged in!</h3>)
     }
 
     return(

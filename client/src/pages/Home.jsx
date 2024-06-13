@@ -7,9 +7,10 @@ function Home(){
     console.log(loggedIn[0])
     if(loggedIn[0]){
         return(
-            <main className = "container md:max-auto px-4 border-solid border-2 border-green-600 outline box-border h-140 w-80 p-4 border-4 text-center absolute inset-x-1/3 top-48">
-                <p className="text-lg">Appointment making system focused on helping you obtain the best care for you needs.
-                    We care just like Mama did for you!
+            <main className = "bg-yellow-100 container md:max-auto px-4 border-solid border-2 border-green-600 outline box-border h-140 w-80 p-4 border-4 text-center absolute inset-x-1/3 top-48">
+                <p className="text-lg font-sans">We are an appointment making system focused on helping you obtain the best care for you needs.
+                    We care just like Mama did for you! Please explore all the service and information that we have regarding our physicians. Take some time to review your appointments and 
+                    if you wish to reschedule or cancel any exisitng appointments.
                 </p>
                 <br></br>
                 <div className="object-center font-bold">
