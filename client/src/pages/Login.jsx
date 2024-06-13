@@ -11,8 +11,9 @@ function Login(){
     }
 
     return(
-        <div className = "container">
-            <h3>Enter your credentials below and press submit to Sign In</h3>
+        <div className = "text-center">
+            <h3 className="font-sans font-semibold">Enter your credentials below and press submit to Sign In</h3>
+            <br></br>
             <LoginForm setLoggedIn={loggedIn[1]} setPatient={patient[1]}/>
         </div>
     );
