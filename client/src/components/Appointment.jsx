@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Calender from './Calender'
 import TimePicker from './TimePicker'
 
-function Appointment({appointment, onDeleteAppointment}){
+function Appointment({appointment, onDeleteAppointment, onUpdateAppointment}){
     const [time, setTime] = useState("")
     const [date, setDate] = useState("")
 
@@ -26,7 +26,6 @@ function Appointment({appointment, onDeleteAppointment}){
             )
         }
         })
-        
     }
 
     function handleCancelation(e){
@@ -41,16 +40,17 @@ function Appointment({appointment, onDeleteAppointment}){
 
 
     return(
-        <div>
+        <div className="text-center">
             <h3>{appointment.title}</h3>
             <h3>{appointment.date_and_time}</h3> {/*Make this look readable */}
             <h3>{appointment.details}</h3>
+            <br></br>
+            <h3>Enter a new date and time if you wish to update your appointment</h3>
             <form onSubmit ={handleUpdate}>
                     <Calender setDate = {setDate}/>
                     <TimePicker setTime={setTime}/>
                     <button type="submit">Update Appointment</button>
                 </form>
-            <button onClick={e=>{setUpdateAppointment(true)}}>Update Appointment</button>
             <button onClick={handleCancelation}>Cancel Appointment</button>
         </div>
     );
