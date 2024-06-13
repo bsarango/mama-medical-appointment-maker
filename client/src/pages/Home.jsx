@@ -7,20 +7,22 @@ function Home(){
     console.log(loggedIn[0])
     if(loggedIn[0]){
         return(
-            <main className = "container md:max-auto px-4 border-solid border-2 border-green-600 outline box-border h-64 w-80 p-4 border-4 text-center absolute inset-x-1/3 top-48">
+            <main className = "container md:max-auto px-4 border-solid border-2 border-green-600 outline box-border h-140 w-80 p-4 border-4 text-center absolute inset-x-1/3 top-48">
                 <p className="text-lg">Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
                 </p>
-                <div className="object-center">
+                <br></br>
+                <div className="object-center font-bold">
                     Please choose any of the following options for our services
                     <br></br>
                     <Link to="/make_appointment">
-                        <button>Create an Appointment</button>
+                        <button className="bg-green-200 hover:bg-emerald-900 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-300 hover:border-transparent rounded">Create an Appointment</button>
                     </Link>
                     <br></br>
                     <Link to="patient_profile">
-                        <button>View your current Appointments</button>
+                        <button className="bg-green-200 hover:bg-emerald-900 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-300 hover:border-transparent rounded">View your current Appointments</button>
                     </Link>
+                    <br></br>
                 </div>
             </main>
         )
@@ -29,7 +31,7 @@ function Home(){
 
     return(
         <>
-            <main className="container md:max-auto px-4 border-solid border-2 border-green-600 outline box-border h-64 w-80 p-4 border-4 text-center absolute inset-x-1/3 top-48">
+            <main className="bg-yellow-100 container md:max-auto px-4 border-solid border-2 border-green-600 box-border h-64 w-80 p-4 border-4 text-center absolute inset-x-1/3 top-48">
                 <h3 className="text-lg font-sans">Appointment making system focused on helping you obtain the best care for you needs.
                     We care just like Mama did for you!
                 </h3>
