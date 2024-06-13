@@ -6,7 +6,7 @@ function PhysiciansIndex(){
     const [physicians, setPhysicians] = useState([])
 
     useEffect(()=>{
-        fetch('http://127.0.0.1:5000/physicians_index')
+        fetch('/api/physicians_index')
         .then(r=>{
             if(r.ok){
                 r.json().then(physiciansIndex => setPhysicians(physiciansIndex));
@@ -20,8 +20,8 @@ function PhysiciansIndex(){
 
     return(
         <div>
-            <h2>A list of our Physicians</h2>
-            <div>{physiciansList}</div>
+            <h2 className="font-bold">A list of our Physicians</h2>
+            <div className="text-center">{physiciansList}</div>
         </div>
     )
 }

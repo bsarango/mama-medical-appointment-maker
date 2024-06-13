@@ -31,13 +31,14 @@ class Index(Resource):
 # def catch_all(path):
 #     return render_template("index.html")
 
+@app.before_request
 def check_if_logged_in():
     open_access_list=[
         'signup',
         'login',
         'check_session',
         'physicians_index',
-        'physicians'
+        'physician'
     ]
     if request.endpoint not in open_access_list and (not session.get('patient_id')):
         return {'error':'Patient not authorized'}, 401
