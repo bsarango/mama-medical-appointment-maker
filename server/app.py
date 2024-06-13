@@ -230,7 +230,7 @@ class Logout(Resource):
         return {'error': 'Unable to log out. Patient not logged in'}, 401
 		
 api.add_resource(Index,"/")
-api.add_resource(Patients_By_Id, "/patient_profile/<int:id>", endpoint='signup')
+api.add_resource(Patients_By_Id, "/patient_profile/<int:id>", endpoint='patient')
 api.add_resource(Appointments, "/appointments", endpoint='appointments')
 api.add_resource(Appointments_By_Id, "/appointments/<int:id>", endpoint = 'appointmnet')
 api.add_resource(Physicians, "/physicians_index", endpoint='physicians_index')

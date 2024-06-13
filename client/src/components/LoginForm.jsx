@@ -11,7 +11,7 @@ function LoginForm({setPatient, setLoggedIn}){
             username : username,
             password : password
         }
-        fetch('http://127.0.0.1:5555/login',
+        fetch('http://127.0.0.1:5000/login',
         {
             method: "POST",
             headers: {

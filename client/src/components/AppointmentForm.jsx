@@ -34,7 +34,7 @@ function AppointmentForm({physicians, createAppointment}){
             physician : selectedPhysician
         }
         console.log(appointmentObj)
-        fetch('http://127.0.0.1:5555/appointments',
+        fetch('http://127.0.0.1:5000/appointments',
         {
             method: "POST",
             headers: {

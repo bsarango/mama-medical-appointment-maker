@@ -26,7 +26,7 @@ function Appointment({appointment, onDeleteAppointment}){
             dateAndTime : date + "-" + time,
         }
 
-        fetch(`http://127.0.0.1:5555/appointment/${appointment.id}`,{
+        fetch(`/appointment/${appointment.id}`,{
             method: "PATCH",
             headers: {
                 "Content-Type":"application/json",
@@ -43,7 +43,7 @@ function Appointment({appointment, onDeleteAppointment}){
     }
 
     function handleCancelation(e){
-        fetch(`http://127.0.0.1:5555/appointment/${appointment.id}`,
+        fetch(`http://127.0.0.1:5000/appointment/${appointment.id}`,
         {
             method: "DELETE",
         })
