@@ -122,16 +122,18 @@ class Appointments_By_Id(Resource):
     def patch(self, id):
         if session.get('patient_id'):
             json = request.get_json()
-            appointment = Appointment.query.filter_by(id=id).first()
+            split_datetime = json.get('dateAndTime').split('-')
+            full_date_and_time = datetime(int(split_datetime[0]),int(split_datetime[1]),int(split_datetime[2]),int(split_datetime[3]),int(split_datetime[4]))
+
+            appointment = Appointment.query.filter(Appointment.id==id).first()
 		
-            for attr in json:
-                setattr(appointment, attr, json.get(attr))
+            appointment.date_and_time=full_date_and_time
 
             try:
                 db.session.add(appointment)
                 db.session.commit()
 
-                return appointment.to_dict(), 204
+                return appointment.to_dict(), 200
 
             except ValueError:
                 return {'error':'Invalid input given. Try again.'}, 400	
@@ -140,7 +142,7 @@ class Appointments_By_Id(Resource):
 
     def delete(self, id):
         if session.get('patient_id'):
-            appointment = Appointment.query.filter_by(id=id).first()
+            appointment = Appointment.query.filter(Appointment.id==id).first()
             
             if appointment:
                 db.session.delete(appointment)
@@ -234,7 +236,7 @@ class Logout(Resource):
 api.add_resource(Index,"/")
 api.add_resource(Patients_By_Id, "/patient_profile/<int:id>", endpoint='patient')
 api.add_resource(Appointments, "/appointments", endpoint='appointments')
-api.add_resource(Appointments_By_Id, "/appointments/<int:id>", endpoint = 'appointmnet')
+api.add_resource(Appointments_By_Id, "/appointments/<int:id>", endpoint = 'appointment')
 api.add_resource(Physicians, "/physicians_index", endpoint='physicians_index')
 api.add_resource(Physicians_By_Id, "/physicians_index/<int:id>", endpoint='physician')
 api.add_resource(CheckSession, "/check_session", endpoint='check_session')
