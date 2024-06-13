@@ -19,7 +19,7 @@ from models import Patient, Physician, Appointment
 #     return '<h1>Phase 4 Project Server</h1>'
 class Index(Resource):
     def get(self):
-        return send_from_directory("./client/dist", "index.html")
+        return send_from_directory("../client/dist", "index.html")
 
 # Views go here! use either route!
 @app.errorhandler(404)
