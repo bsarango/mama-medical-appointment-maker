@@ -88,10 +88,11 @@ class Appointments(Resource):
 
         if session.get('patient_id'):
             json = request.get_json()
-            split_datetime = json.get('date_and_time').split('-')
+            print(json)
+            split_datetime = json.get('dateAndTime').split('-')
             full_date_and_time = datetime(int(split_datetime[0]),int(split_datetime[1]),int(split_datetime[2]),int(split_datetime[3]),int(split_datetime[4]))
 
-            appointment = Appointment(title = json.get('title'), date_and_time = full_date_and_time, patient_id = session.get('patient_id'), specialty =json.get('specialty'), details = json.get('details'), physician_id = json.get('physician_id'))
+            appointment = Appointment(title = json.get('title'), date_and_time = full_date_and_time, patient_id = session.get('patient_id'), specialty =json.get('specialty'), details = json.get('details'), physician_id = json.get('physician'))
 
             try:
                 db.session.add(appointment)

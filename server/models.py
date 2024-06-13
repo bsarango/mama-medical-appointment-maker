@@ -148,6 +148,9 @@ class Appointment(db.Model, SerializerMixin):
     def validate_specialty(self, key, specialty):
         specialties = ['primary care', 'cardiology', 'nephrology', 'obstetrics and gynecology', 'pulmonary', 'neurology', 'endocrinology', 'dermatology', 'pediatrics']
         
+        if specialty == "":
+            return specialty
+
         if specialty not in specialties and specialty != None:
             raise ValueError("Invalid specialty for practice. Enter again")
 

@@ -19,10 +19,10 @@ if __name__ == '__main__':
 
         print("Clearing db...")
 
-        Physician.query.delete()
         Appointment.query.delete()
         Patient.query.delete()
-
+        Physician.query.delete()
+        
         fake = Faker()
 
         print("Starting seed...")
@@ -47,13 +47,37 @@ if __name__ == '__main__':
         first_name = fake.first_name()
         last_name = fake.last_name()
         specialty = "cardiology"
-        office_address = "200 East 2nd Stree New York, New York, 10010"
+        office_address = "200 East 2nd Street New York, New York, 10010"
         office_number = "2122002000"
         image = "https://static.vecteezy.com/system/resources/previews/005/520/145/original/cartoon-drawing-of-a-doctor-vector.jpg"
 
-        physician = Physician(first_name = first_name, last_name = last_name, specialty = specialty, office_address=office_address, office_number = office_number,image=image)
+        physician1 = Physician(first_name = first_name, last_name = last_name, specialty = specialty, office_address=office_address, office_number = office_number,image=image)
 
-        db.session.add(physician)
+        db.session.add(physician1)
+        db.session.commit()
+
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        specialty = "neurology"
+        office_address = "100 East 2nd Street New York, New York, 10010"
+        office_number = "2122002001"
+        image = "https://static.vecteezy.com/system/resources/previews/005/520/145/original/cartoon-drawing-of-a-doctor-vector.jpg"
+
+        physician2 = Physician(first_name = first_name, last_name = last_name, specialty = specialty, office_address=office_address, office_number = office_number,image=image)
+
+        db.session.add(physician2)
+        db.session.commit()
+
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        specialty = "pediatrics"
+        office_address = "300 East 2nd Stree New York, New York, 10010"
+        office_number = "2122002002"
+        image = "https://static.vecteezy.com/system/resources/previews/005/520/145/original/cartoon-drawing-of-a-doctor-vector.jpg"
+
+        physician3 = Physician(first_name = first_name, last_name = last_name, specialty = specialty, office_address=office_address, office_number = office_number,image=image)
+
+        db.session.add(physician3)
         db.session.commit()
 
         print("Seeding Appointments")
@@ -66,6 +90,16 @@ if __name__ == '__main__':
         appointment = Appointment(title=title, date_and_time = date_and_time, specialty=specialty, details=details)
 
         db.session.add(appointment)
+        db.session.commit()
+
+        title = "Annual Shot Administration"
+        date_and_time = fake.date_time()
+        specialty = "pediatrics"
+        details = "Please arrive 15 minutes prior your appointment. Please arrive with the following documents:\n List of medications\n Identification Card\n Health Insurance\n Prior visit inforamtion\n Please be ready to report any new symptoms or changes you have experienced since your last visit. We look forward to seeing you during your next visit."
+
+        appointment2 = Appointment(title=title, date_and_time = date_and_time, specialty=specialty, details=details)
+
+        db.session.add(appointment2)
         db.session.commit()
 
         print("New data seeded for Patient, Physician, and Appointment!")
