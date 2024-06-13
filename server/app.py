@@ -31,6 +31,17 @@ class Index(Resource):
 # def catch_all(path):
 #     return render_template("index.html")
 
+def check_if_logged_in():
+    open_access_list=[
+        'signup',
+        'login',
+        'check_session',
+        'physicians_index',
+        'physicians'
+    ]
+    if request.endpoint not in open_access_list and (not session.get('patient_id')):
+        return {'error':'Patient not authorized'}, 401
+
 class Patients_By_Id(Resource):
     
     def get(self, id):
@@ -159,9 +170,10 @@ class Physicians_By_Id(Resource):
 class CheckSession(Resource):
     
     def get(self):
-        patient = Patient.query.filter(Patient.id == session.get('patient_id')).first()
+        patient_id = session.get('patient_id')
 
-        if patient:
+        if patient_id:
+            patient = Patient.query.filter(Patient.id == patient_id).first()
             return patient.to_dict(), 200
             
         return {'error':'Patient not signed in. Please sign in.'} , 401
@@ -218,15 +230,15 @@ class Logout(Resource):
         return {'error': 'Unable to log out. Patient not logged in'}, 401
 		
 api.add_resource(Index,"/")
-api.add_resource(Patients_By_Id, "/patient_profile/<int:id>")
-api.add_resource(Appointments, "/appointments")
-api.add_resource(Appointments_By_Id, "/appointments/<int:id>")
-api.add_resource(Physicians, "/physicians_index")
-api.add_resource(Physicians_By_Id, "/physicians_index/<int:id>")
-api.add_resource(CheckSession, "/check_session")
-api.add_resource(SignUp, "/signup")
-api.add_resource(Login, "/login")
-api.add_resource(Logout, "/logout")
+api.add_resource(Patients_By_Id, "/patient_profile/<int:id>", endpoint='signup')
+api.add_resource(Appointments, "/appointments", endpoint='appointments')
+api.add_resource(Appointments_By_Id, "/appointments/<int:id>", endpoint = 'appointmnet')
+api.add_resource(Physicians, "/physicians_index", endpoint='physicians_index')
+api.add_resource(Physicians_By_Id, "/physicians_index/<int:id>", endpoint='physician')
+api.add_resource(CheckSession, "/check_session", endpoint='check_session')
+api.add_resource(SignUp, "/signup", endpoint='signup')
+api.add_resource(Login, "/login", endpoint='login')
+api.add_resource(Logout, "/logout", endpoint = 'logout')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
