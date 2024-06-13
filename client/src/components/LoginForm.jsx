@@ -26,12 +26,12 @@ function LoginForm({setPatient, setLoggedIn}){
     };
 
     return(
-        <div>
+        <div className="bg-yellow-100">
             <h2>Please Enter Your Username and Password to Login!</h2>
-            <form className="container md:max-auto px-4 border-solid border-2 border-green-600 outline box-border h-64 w-80 p-4 border-4 text-center absolute inset-1/2 top-48" onSubmit = {handleSubmit}>
+            <form className="bg-yellow-100 border-solid border-1 border-green-600 box-border h-40 w-80 p-4 border-4 text-center absolute inset-1/3 top-48" onSubmit = {handleSubmit}>
                 <label htmlFor="username">Username</label>
                 <input
-                    className="border-solid border-2 border-green-600"
+                    className="border-solid border-2 border-green-600 py-1 space-y-1"
                     id = "username"
                     type = "text"
                     name = "username"
@@ -40,14 +40,14 @@ function LoginForm({setPatient, setLoggedIn}){
                 />
                 <label htmlFor="password">Password</label>
                 <input
-                    className="border-solid border-2 border-green-600"
+                    className="border-solid border-2 border-green-600 py-1 space-y-1"
                     id = "password"
                     type = "text"
                     name = "password"
                     value = {password}
                     onChange = {e=>setPassword(e.target.value)}
                 />
-                <button type="submit" className="bg-green-200 hover:bg-emerald-900 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-300 hover:border-transparent rounded">Submit</button>
+                <button type="submit" className="bg-green-200 hover:bg-emerald-900 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-300 hover:border-transparent rounded">Login</button>
             </form>
         </div>
     )
