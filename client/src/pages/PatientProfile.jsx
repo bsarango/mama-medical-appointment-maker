@@ -40,15 +40,15 @@ function PatientProfile(){
 
     if(loggedIn[0]){
         return(
-            <div className = "container">
-                <h3>
+            <div className = "bg-yellow-100">
+                <Link to="/make_appointment">
+                    <button className = "bg-transparent hover:bg-emerald-900 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-300 hover:border-transparent rounded">Make a New Appointment</button>
+                </Link>
+                <h3 className="font-bold text-center">
                     View your current appointments and information. You can cancel or update your appointment by selecting the respective option.
                 </h3>
                 <PatientDetails patient={patient[0]}/>
-                <div>{displayAppointments}</div>
-                <Link to="/make_appointment">
-                    <button className = "button">Make a New Appointment</button>
-                </Link>
+                <div className="">{displayAppointments}</div>
             </div>
         )
     };
