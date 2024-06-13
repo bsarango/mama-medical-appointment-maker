@@ -12,19 +12,26 @@ function AppointmentForm({physicians, createAppointment}){
 
     const physicianOptions = physicians.map(physician=>{
         return (
-            <option 
-                key={physician.id} 
+            <option  
+                key={physician.id}
                 value={physician.id}
-                name = {physician.specialty}
+                name={physician.last_name}
             >
-                
                 Dr. {physician.first_name} {physician.last_name}
             </option>
         )
     });
 
+    const selectedSpecialty = physicians.filter(physician=>{
+        if(physician.id === parseInt(selectedPhysician)){
+            return physician[specialty]
+        }
+    });
+    
+
     function handleSubmit(e){
         e.preventDefault();
+        setSpecialty(selectedSpecialty)
 
         const appointmentObj = {
             title : title,
@@ -48,7 +55,7 @@ function AppointmentForm({physicians, createAppointment}){
     }
 //Make a scroll down to select physician for the appointment
     return(
-        <div>
+        <div className="text-center">
             <h2>Please enter all the fields </h2>
             <form className = "userForm" onSubmit = {handleSubmit}>
                 <label> Enter the type of or reason for Appointment</label>
@@ -63,11 +70,8 @@ function AppointmentForm({physicians, createAppointment}){
                 <label>Select a Time</label>
                     <TimePicker setTime={setTime}/>
                 <label>Select Physician</label>
-                
-                {/* {()=>{setSelectedPhysician(physicians[0][id]),setSpecialty(physicians[0][specialty])}} */}
-                <select onChange={(e)=>{setSelectedPhysician(e.target.value),setSpecialty(e.target.name)}}>
+                <select onChange={(e)=>{setSelectedPhysician(e.target.value)}}>
                     {physicianOptions}
-                    {console.log(physicians)}
                 </select>
                 <button type="Submit">Make Appointment</button>
             </form>
