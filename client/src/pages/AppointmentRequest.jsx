@@ -15,7 +15,7 @@ function AppointmentRequest(){
     }, []);
 
     return(
-        <div>
+        <div className="bg-yellow-100">
             <h2>Enter the information for your Appointment</h2>
             <AppointmentForm  physicians={physicians}/>
         </div>

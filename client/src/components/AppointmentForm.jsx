@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Calender from './Calender';
 import TimePicker from './TimePicker'
 
-function AppointmentForm({physicians, createAppointment}){
+function AppointmentForm({physicians}){
 
     const [title, setTitle] = useState("")
     const [date, setDate] = useState("")
@@ -56,24 +56,30 @@ function AppointmentForm({physicians, createAppointment}){
 //Make a scroll down to select physician for the appointment
     return(
         <div className="text-center">
-            <h2>Please enter all the fields </h2>
+            <h2 className="italic">Please enter all the fields </h2>
             <form className = "userForm" onSubmit = {handleSubmit}>
                 <label> Enter the type of or reason for Appointment</label>
+                <br></br>
                 <input
+                    className="border-solid border-2 border-green-600 py-1 space-y-1"
                     type = "text"
                     name = "title"
                     value = {title}
                     onChange = {(e)=>{setTitle(e.target.value)}}
                 />
-                <label>Select a date</label>
+                <br></br>
+                <label>Select an Appointment date</label>
                     <Calender setDate={setDate}/>
+                <br></br>
                 <label>Select a Time</label>
                     <TimePicker setTime={setTime}/>
+                <br></br>
                 <label>Select Physician</label>
                 <select onChange={(e)=>{setSelectedPhysician(e.target.value)}}>
                     {physicianOptions}
                 </select>
-                <button type="Submit">Make Appointment</button>
+                <br></br>
+                <button type="Submit" className="bg-green-200 hover:bg-emerald-900 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-300 hover:border-transparent rounded">Make Appointment</button>
             </form>
         </div>
     );
