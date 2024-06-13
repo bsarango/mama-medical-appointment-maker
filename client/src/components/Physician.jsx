@@ -2,7 +2,7 @@ import React from 'react'
 
 function Physician({physician}){
     return(
-        <div>
+        <div className="border py-1">
             <img src={physician.img} alt="Physician"/>
             <h2>Dr. {physician.last_name} {physician.first_name}</h2>
             <br></br>

@@ -19,7 +19,7 @@ function PhysiciansIndex(){
     })
 
     return(
-        <div>
+        <div className="bg-yellow-100">
             <h2 className="font-bold">A list of our Physicians</h2>
             <div className="text-center">{physiciansList}</div>
         </div>
