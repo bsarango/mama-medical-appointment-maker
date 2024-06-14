@@ -9,7 +9,7 @@ function PhysicianForm({onAddPhysician}){
     const[officeNumber, setOfficeNumber] = useState("")
 
     function handleSubmit(e){
-        e.preventDefault()
+        e.preventDefault();
         const formValues={
             firstName: firstName,
             lastName: lastName,
@@ -18,7 +18,7 @@ function PhysicianForm({onAddPhysician}){
             officeNumber: officeNumber
         }
 
-        fetch('/api/physicians',
+        fetch('/api/physicians_index',
         {
             method: "POST",
             headers: {
@@ -32,7 +32,7 @@ function PhysicianForm({onAddPhysician}){
     }
 
     return(
-        <form>
+        <form onSubmit={handleSubmit}>
             <label>First Name</label>
             <input
                 value = {firstName}
@@ -57,36 +57,36 @@ function PhysicianForm({onAddPhysician}){
                 >
                     Pediatrics
                 </option>
-                <options
+                <option
                     value="primary care"
                 >
                     Primary Care
-                </options>
-                <options
+                </option>
+                <option
                     value="nephrology"
                 >
                     Nephrology
-                </options>
-                <options
+                </option>
+                <option
                     value="obstetrics and gynecology"
                 >
                     OBGYN
-                </options>
-                <options
+                </option>
+                <option
                     value="pulmonary"
                 >
                     Pulmonary
-                </options>
-                <options
+                </option>
+                <option
                     value="endocrinology"
                 >
                     Endocrinology
-                </options>
-                <options
+                </option>
+                <option
                     value='dermatology'
                 >
                     Dermatology
-                </options>
+                </option>
             </select>
             <br></br>
             <label>Office Address</label>
@@ -99,7 +99,7 @@ function PhysicianForm({onAddPhysician}){
                 value={officeNumber}
                 onChange={e=>{setOfficeNumber(e.target.value)}}
             />
-            <button type="submit" onSubmit={handleSubmit}>Submit Physician</button>
+            <button type="submit">Submit Physician</button>
         </form>
     )
 }
