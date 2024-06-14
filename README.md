@@ -34,6 +34,7 @@ pipenv install
 To start the program with both front and back end simultaneosly, enter the following command
 
 ```bash
+pipenv shell
 honcho start -f procfile.dev
 ```
 Once started, open the given url in the browser
