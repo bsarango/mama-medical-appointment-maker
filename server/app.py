@@ -160,6 +160,17 @@ class Physicians(Resource):
 		physicians = [physician.to_dict() for physician in Physician.query.all()]
 		return physicians, 200
 
+    def post(self):
+        json = request.get_json()
+        new_physician = Physician(first_name=json.get('first_name'), last_name=json.get('last_name'), specialty=json.get('specialty'), office_address=json.get('officeAddress'), image=json.get('image'))
+
+        try:
+            db.session.add(new_physician)
+            db.session.commit()
+            return new_physician.to_dict(),201
+
+        except ValueError:
+            return{'error':'Invalid input for Physician. Try again'}
 
 class Physicians_By_Id(Resource):
 
