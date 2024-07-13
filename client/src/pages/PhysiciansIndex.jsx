@@ -26,9 +26,10 @@ function PhysiciansIndex(){
 
     return(
         <div className="bg-yellow-100">
-            <h2>Add a Physician to the Practice</h2>
-            <PhysicianForm onAddPhysician={addPhysicianToList}/>
-            <h2 className="font-bold">A list of our Physicians</h2>
+            <h2>Add any of your outside Physicians to manage any other appointments</h2>
+            <PhysicianForm className ="text-center" onAddPhysician={addPhysicianToList}/>
+            <br></br>
+            <h2 className="font-bold text-center">A list of our Physicians</h2>
             <div className="text-center">{physiciansList}</div>
         </div>
     )
