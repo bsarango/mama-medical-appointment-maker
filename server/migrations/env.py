@@ -1,5 +1,5 @@
 import logging
-from models import Patient, Appointment, Physician 
+# from models import Physician, Appointment, Patient
 from logging.config import fileConfig
 
 from flask import current_app

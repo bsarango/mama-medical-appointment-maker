@@ -1,8 +1,8 @@
-"""Patient, Appointment, and Physician models created and imported to config.py
+"""initial migration
 
-Revision ID: 1b615823c332
+Revision ID: 73571f84b251
 Revises: 
-Create Date: 2024-05-22 22:35:17.921345
+Create Date: 2024-07-13 14:26:31.597537
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1b615823c332'
+revision = '73571f84b251'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,21 +35,21 @@ def upgrade():
     sa.Column('last_name', sa.String(), nullable=False),
     sa.Column('specialty', sa.String(), nullable=True),
     sa.Column('office_address', sa.String(), nullable=False),
-    sa.Column('office_number', sa.Integer(), nullable=False),
+    sa.Column('office_number', sa.String(), nullable=False),
     sa.Column('image', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id', name=op.f('pk_physicians'))
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_physicians')),
+    sa.UniqueConstraint('office_number', name=op.f('uq_physicians_office_number'))
     )
     op.create_table('appointments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('date_and_time', sa.DateTime(), nullable=False),
     sa.Column('specialty', sa.String(), nullable=True),
-    sa.Column('completed', sa.Boolean(), nullable=True),
     sa.Column('details', sa.String(), nullable=False),
     sa.Column('patient_id', sa.Integer(), nullable=True),
-    sa.Column('physicians_id', sa.Integer(), nullable=True),
+    sa.Column('physician_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['patient_id'], ['patients.id'], name=op.f('fk_appointments_patient_id_patients')),
-    sa.ForeignKeyConstraint(['physicians_id'], ['physicians.id'], name=op.f('fk_appointments_physicians_id_physicians')),
+    sa.ForeignKeyConstraint(['physician_id'], ['physicians.id'], name=op.f('fk_appointments_physician_id_physicians')),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_appointments'))
     )
     # ### end Alembic commands ###
