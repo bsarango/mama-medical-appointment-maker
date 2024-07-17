@@ -32,7 +32,7 @@ function PhysicianForm({onAddPhysician}){
     }
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form className="text-center" onSubmit={handleSubmit}>
             <label>First Name</label>
             <input
                 value = {firstName}
