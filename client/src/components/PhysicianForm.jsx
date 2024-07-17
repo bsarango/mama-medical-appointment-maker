@@ -32,20 +32,34 @@ function PhysicianForm({onAddPhysician}){
     }
 
     return(
-        <form className="text-center" onSubmit={handleSubmit}>
-            <label>First Name</label>
+        <form className="bg-white rounded text-center px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+            <label
+                className="block text-emerald-700 text-sm font-bold mb-2"
+            >
+                First Name
+            </label>
             <input
+                className="border-2"
                 value = {firstName}
                 onChange={e=>{setFirstName(e.target.value)}}
             ></input>
             <br></br>
-            <label>Last Name</label>
+            <label
+                className="block text-emerald-700 text-sm font-bold mb-2"
+            >
+                Last Name
+            </label>
             <input
+                className="border-2"
                 value = {lastName}
                 onChange={e=>{setLastName(e.target.value)}}
             />
             <br></br>
-            <label>Specialty</label>
+            <label
+                className="block text-emerald-700 text-sm font-bold mb-2"
+            >
+                Specialty
+            </label>
             <select onChange = {e=>{setSpecialty(e.target.value)}}>
                 <option
                     value = "cardiology"
@@ -89,17 +103,32 @@ function PhysicianForm({onAddPhysician}){
                 </option>
             </select>
             <br></br>
-            <label>Office Address</label>
+            <label
+                className="block text-emerald-700 text-sm font-bold mb-2"
+            >
+                Office Address
+            </label>
             <input
+                className="border-2"
                 value={officeAddress}
                 onChange={e=>{setOfficeAddress(e.target.value)}}
             />
-             <label>Office Number</label>
+            
+            <label
+                className="block text-emerald-700 text-sm font-bold mb-2" 
+            >
+                Office Number
+            </label>
             <input
+                className="border-2"
                 value={officeNumber}
                 onChange={e=>{setOfficeNumber(e.target.value)}}
             />
-            <button type="submit">Submit Physician</button>
+            <br></br>
+            <button 
+                className="border-2 color-white"
+                type="submit">Submit Physician
+            </button>
         </form>
     )
 }
