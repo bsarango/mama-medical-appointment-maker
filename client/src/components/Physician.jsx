@@ -2,8 +2,8 @@ import React from 'react'
 
 function Physician({physician}){
     return(
-        <div className="border py-1">
-            <img src={physician.img} alt="Physician"/>
+        <div className="w-96 border-2 pt-2 pb-2 m-0">
+            <img src={physician.img} alt="Physician Picture"/>
             <h2>Dr. {physician.last_name} {physician.first_name}</h2>
             <br></br>
             <h3>Specialty: {physician.specialty}</h3>

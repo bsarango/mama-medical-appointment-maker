@@ -30,7 +30,7 @@ function PhysiciansIndex(){
             <PhysicianForm onAddPhysician={addPhysicianToList}/>
             <br></br>
             <h2 className="font-bold text-center">A list of our Physicians</h2>
-            <div className="text-center">{physiciansList}</div>
+            <div className="inset-x-1/2 text-center">{physiciansList}</div>
         </div>
     )
 }
