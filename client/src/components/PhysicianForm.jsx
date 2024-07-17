@@ -32,7 +32,8 @@ function PhysicianForm({onAddPhysician}){
     }
 
     return(
-        <form className="bg-white rounded text-center px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+        <div className="w-full max-w-xs">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
             <label
                 className="block text-emerald-700 text-sm font-bold mb-2"
             >
@@ -120,16 +121,19 @@ function PhysicianForm({onAddPhysician}){
                 Office Number
             </label>
             <input
-                className="border-2"
+                className="border-2 rounded"
                 value={officeNumber}
                 onChange={e=>{setOfficeNumber(e.target.value)}}
             />
-            <br></br>
+            
             <button 
-                className="border-2 color-white"
-                type="submit">Submit Physician
+                className="bg-emerald-400 rounded hover:bg-green-600 "
+                type="submit"
+            >
+            Submit Physician
             </button>
         </form>
+        </div>
     )
 }
 
